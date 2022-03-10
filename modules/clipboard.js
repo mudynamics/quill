@@ -477,26 +477,26 @@ function matchText(node, delta) {
   if (text.trim().length === 0 && node.parentNode == null) {
     return delta;
   }
-  if (!isPre(node)) {
-    const replacer = (collapse, match) => {
-      const replaced = match.replace(/[^\u00a0]/g, ''); // \u00a0 is nbsp;
-      return replaced.length < 1 && collapse ? ' ' : replaced;
-    };
-    text = text.replace(/\r\n/g, ' ').replace(/\n/g, ' ');
-    text = text.replace(/\s\s+/g, replacer.bind(replacer, true)); // collapse whitespace
-    if (
-      (node.previousSibling == null && isLine(node.parentNode)) ||
-      (node.previousSibling != null && isLine(node.previousSibling))
-    ) {
-      text = text.replace(/^\s+/, replacer.bind(replacer, false));
-    }
-    if (
-      (node.nextSibling == null && isLine(node.parentNode)) ||
-      (node.nextSibling != null && isLine(node.nextSibling))
-    ) {
-      text = text.replace(/\s+$/, replacer.bind(replacer, false));
-    }
-  }
+  // if (!isPre(node)) {
+  //   const replacer = (collapse, match) => {
+  //     const replaced = match.replace(/[^\u00a0]/g, ''); // \u00a0 is nbsp;
+  //     return replaced.length < 1 && collapse ? ' ' : replaced;
+  //   };
+  //   text = text.replace(/\r\n/g, ' ').replace(/\n/g, ' ');
+  //   text = text.replace(/\s\s+/g, replacer.bind(replacer, true)); // collapse whitespace
+  //   if (
+  //     (node.previousSibling == null && isLine(node.parentNode)) ||
+  //     (node.previousSibling != null && isLine(node.previousSibling))
+  //   ) {
+  //     text = text.replace(/^\s+/, replacer.bind(replacer, false));
+  //   }
+  //   if (
+  //     (node.nextSibling == null && isLine(node.parentNode)) ||
+  //     (node.nextSibling != null && isLine(node.nextSibling))
+  //   ) {
+  //     text = text.replace(/\s+$/, replacer.bind(replacer, false));
+  //   }
+  // }
   return delta.insert(text);
 }
 
