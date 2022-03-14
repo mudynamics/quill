@@ -114,6 +114,7 @@ const baseConfig = {
     libraryTarget: 'umd',
     path: path.resolve(__dirname, '../dist/'),
   },
+  devtool: 'source-map',
   resolve: {
     alias: {
       parchment: path.resolve(
@@ -154,7 +155,6 @@ module.exports = env => {
       ...prodConfig,
       mode: 'production',
       entry: { 'quill.min.js': './quill.js' },
-      devtool: 'source-map',
     };
   } else if (env && env.coverage) {
     baseConfig.module.rules[0].use[0].options.plugins = ['istanbul'];
