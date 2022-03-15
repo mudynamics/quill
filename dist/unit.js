@@ -5935,11 +5935,16 @@ class Toolbar extends _core_module__WEBPACK_IMPORTED_MODULE_4__["default"] {
     const formats = range == null ? {} : this.quill.getFormat(range);
     this.controls.forEach(pair => {
       const [format, input] = pair;
-      console.log({
-        formats,
-        format,
-        input
-      });
+
+      if (format === 'list') {
+        if (this.isTable(range)) {
+          input.setAttribute('disabled', true);
+          input.classList.add('ql-disabled');
+        } else {
+          input.setAttribute('disabled', false);
+          input.classList.remove('ql-disabled');
+        }
+      }
 
       if (input.tagName === 'SELECT') {
         let option;
