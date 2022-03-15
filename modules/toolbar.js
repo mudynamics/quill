@@ -130,10 +130,10 @@ class Toolbar extends Module {
       if (format === 'list') {
         if (this.isTable(range)) {
           input.setAttribute('disabled', true);
-          input.classList.add('ql-disabled');
+          input.classList.add('button-disabled');
         } else {
-          input.setAttribute('disabled', false);
-          input.classList.remove('ql-disabled');
+          input.removeAttribute('disabled');
+          input.classList.remove('button-disabled');
         }
       }
 

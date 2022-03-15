@@ -5940,10 +5940,10 @@ class Toolbar extends _core_module__WEBPACK_IMPORTED_MODULE_4__["default"] {
       if (format === 'list') {
         if (this.isTable(range)) {
           input.setAttribute('disabled', true);
-          input.classList.add('ql-disabled');
+          input.classList.add('button-disabled');
         } else {
-          input.setAttribute('disabled', false);
-          input.classList.remove('ql-disabled');
+          input.removeAttribute('disabled');
+          input.classList.remove('button-disabled');
         }
       }
 
