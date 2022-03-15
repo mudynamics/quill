@@ -48,11 +48,27 @@ class Toolbar extends Module {
     this.handlers[format] = handler;
   }
 
+  isTable(range) {
+    if (!range) {
+      range = this.quill.getSelection();
+    }
+
+    if (!range) {
+      return false;
+    }
+
+    const formats = this.quill.getFormat(range.index);
+
+    return formats.table && !range.length;
+  }
+
   attach(input) {
     let format = Array.from(input.classList).find(className => {
       return className.indexOf('ql-') === 0;
     });
+
     if (!format) return;
+
     format = format.slice('ql-'.length);
     if (input.tagName === 'BUTTON') {
       input.setAttribute('type', 'button');
@@ -111,6 +127,16 @@ class Toolbar extends Module {
     const formats = range == null ? {} : this.quill.getFormat(range);
     this.controls.forEach(pair => {
       const [format, input] = pair;
+      if (format === 'list') {
+        if (this.isTable(range)) {
+          input.setAttribute('disabled', true);
+          input.classList.add('button-disabled');
+        } else {
+          input.removeAttribute('disabled');
+          input.classList.remove('button-disabled');
+        }
+      }
+
       if (input.tagName === 'SELECT') {
         let option;
         if (range == null) {
@@ -163,8 +189,10 @@ function addControls(container, groups) {
   if (!Array.isArray(groups[0])) {
     groups = [groups];
   }
+
   groups.forEach(controls => {
     const group = document.createElement('span');
+
     group.classList.add('ql-formats');
     controls.forEach(control => {
       if (typeof control === 'string') {

@@ -32,6 +32,10 @@
     }
   },
   "dependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/preset-env": "^7.16.11",
     "clone": "^2.1.1",
     "deep-equal": "^1.0.1",
     "eventemitter3": "^3.1.0",
@@ -40,10 +44,8 @@
     "quill-delta": "^3.6.2"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "^8.0.0",
     "babel-plugin-istanbul": "^4.1.6",
-    "babel-preset-env": "^1.7.0",
     "css-loader": "~0.28.9",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
