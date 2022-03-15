@@ -4294,26 +4294,27 @@ function matchText(node, delta) {
 
   if (text.trim().length === 0 && node.parentNode == null) {
     return delta;
-  }
+  } // if (!isPre(node)) {
+  //   const replacer = (collapse, match) => {
+  //     const replaced = match.replace(/[^\u00a0]/g, ''); // \u00a0 is nbsp;
+  //     return replaced.length < 1 && collapse ? ' ' : replaced;
+  //   };
+  //   text = text.replace(/\r\n/g, ' ').replace(/\n/g, ' ');
+  //   text = text.replace(/\s\s+/g, replacer.bind(replacer, true)); // collapse whitespace
+  //   if (
+  //     (node.previousSibling == null && isLine(node.parentNode)) ||
+  //     (node.previousSibling != null && isLine(node.previousSibling))
+  //   ) {
+  //     text = text.replace(/^\s+/, replacer.bind(replacer, false));
+  //   }
+  //   if (
+  //     (node.nextSibling == null && isLine(node.parentNode)) ||
+  //     (node.nextSibling != null && isLine(node.nextSibling))
+  //   ) {
+  //     text = text.replace(/\s+$/, replacer.bind(replacer, false));
+  //   }
+  // }
 
-  if (!isPre(node)) {
-    const replacer = (collapse, match) => {
-      const replaced = match.replace(/[^\u00a0]/g, ''); // \u00a0 is nbsp;
-
-      return replaced.length < 1 && collapse ? ' ' : replaced;
-    };
-
-    text = text.replace(/\r\n/g, ' ').replace(/\n/g, ' ');
-    text = text.replace(/\s\s+/g, replacer.bind(replacer, true)); // collapse whitespace
-
-    if (node.previousSibling == null && isLine(node.parentNode) || node.previousSibling != null && isLine(node.previousSibling)) {
-      text = text.replace(/^\s+/, replacer.bind(replacer, false));
-    }
-
-    if (node.nextSibling == null && isLine(node.parentNode) || node.nextSibling != null && isLine(node.nextSibling)) {
-      text = text.replace(/\s+$/, replacer.bind(replacer, false));
-    }
-  }
 
   return delta.insert(text);
 }
@@ -5857,11 +5858,27 @@ class Toolbar extends _core_module__WEBPACK_IMPORTED_MODULE_4__["default"] {
     this.handlers[format] = handler;
   }
 
+  isTable(range) {
+    if (!range) {
+      range = this.quill.getSelection();
+    }
+
+    if (!range) {
+      return false;
+    }
+
+    const formats = this.quill.getFormat(range.index);
+    return formats.table && !range.length;
+  }
+
   attach(input) {
     let format = Array.from(input.classList).find(className => {
       return className.indexOf('ql-') === 0;
     });
     if (!format) return;
+    console.log({
+      format
+    });
     format = format.slice('ql-'.length);
 
     if (input.tagName === 'BUTTON') {

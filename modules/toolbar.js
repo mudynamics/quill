@@ -48,11 +48,28 @@ class Toolbar extends Module {
     this.handlers[format] = handler;
   }
 
+  isTable(range) {
+    if (!range) {
+      range = this.quill.getSelection();
+    }
+
+    if (!range) {
+      return false;
+    }
+
+    const formats = this.quill.getFormat(range.index);
+
+    return formats.table && !range.length;
+  }
+
   attach(input) {
     let format = Array.from(input.classList).find(className => {
       return className.indexOf('ql-') === 0;
     });
+
     if (!format) return;
+
+    console.log({ format });
     format = format.slice('ql-'.length);
     if (input.tagName === 'BUTTON') {
       input.setAttribute('type', 'button');
@@ -163,8 +180,10 @@ function addControls(container, groups) {
   if (!Array.isArray(groups[0])) {
     groups = [groups];
   }
+
   groups.forEach(controls => {
     const group = document.createElement('span');
+
     group.classList.add('ql-formats');
     controls.forEach(control => {
       if (typeof control === 'string') {
