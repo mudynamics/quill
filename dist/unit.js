@@ -3741,6 +3741,7 @@ class TableContainer extends _blots_container__WEBPACK_IMPORTED_MODULE_1__["defa
 
 TableContainer.blotName = 'table-container';
 TableContainer.tagName = 'TABLE';
+TableContainer.className = 'section-table';
 TableContainer.allowedChildren = [TableBody];
 TableBody.requiredContainer = TableContainer;
 TableBody.allowedChildren = [TableRow];
