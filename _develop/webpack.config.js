@@ -39,11 +39,20 @@ const jsRules = {
       options: {
         presets: [
           [
-            'env',
+            '@babel/preset-env',
             {
               targets: {
                 browsers: ['chrome >= 61'],
               },
+              loose: true,
+            },
+          ],
+        ],
+        plugins: [
+          [
+            '@babel/plugin-proposal-class-properties',
+            {
+              legacy: true,
               loose: true,
             },
           ],
