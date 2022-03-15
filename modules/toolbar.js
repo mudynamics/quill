@@ -69,7 +69,6 @@ class Toolbar extends Module {
 
     if (!format) return;
 
-    console.log({ format });
     format = format.slice('ql-'.length);
     if (input.tagName === 'BUTTON') {
       input.setAttribute('type', 'button');
@@ -128,6 +127,7 @@ class Toolbar extends Module {
     const formats = range == null ? {} : this.quill.getFormat(range);
     this.controls.forEach(pair => {
       const [format, input] = pair;
+      console.log({ formats, format, input });
       if (input.tagName === 'SELECT') {
         let option;
         if (range == null) {

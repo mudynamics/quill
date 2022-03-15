@@ -5876,9 +5876,6 @@ class Toolbar extends _core_module__WEBPACK_IMPORTED_MODULE_4__["default"] {
       return className.indexOf('ql-') === 0;
     });
     if (!format) return;
-    console.log({
-      format
-    });
     format = format.slice('ql-'.length);
 
     if (input.tagName === 'BUTTON') {
@@ -5938,6 +5935,11 @@ class Toolbar extends _core_module__WEBPACK_IMPORTED_MODULE_4__["default"] {
     const formats = range == null ? {} : this.quill.getFormat(range);
     this.controls.forEach(pair => {
       const [format, input] = pair;
+      console.log({
+        formats,
+        format,
+        input
+      });
 
       if (input.tagName === 'SELECT') {
         let option;
