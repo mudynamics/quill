@@ -442,9 +442,7 @@ module.exports = "<svg viewbox=\"0 0 18 18\"> <rect class=ql-stroke height=12 wi
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.default = exports.BlockEmbed = exports.bubbleFormats = exports.blockDelta = undefined;
 
 var _extend = __webpack_require__(/*! extend */ "./node_modules/extend/index.js");
@@ -528,8 +526,7 @@ class Block extends _parchment.BlockBlot {
   }
 
   insertBefore(blot, ref) {
-    const head = this.children.head;
-
+    const { head } = this.children;
     super.insertBefore(blot, ref);
     if (head instanceof _break2.default) {
       head.remove();
@@ -654,9 +651,7 @@ exports.default = Block;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
 
@@ -696,9 +691,7 @@ exports.default = Break;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
 
@@ -718,11 +711,7 @@ exports.default = Container;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+exports.__esModule = true;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
 
@@ -794,10 +783,7 @@ class Cursor extends _parchment.EmbedBlot {
     let start;
     let end;
     if (range != null && range.start.node === this.textNode && range.end.node === this.textNode) {
-      var _ref = [this.textNode, range.start.offset, range.end.offset];
-      restoreText = _ref[0];
-      start = _ref[1];
-      end = _ref[2];
+      [restoreText, start, end] = [this.textNode, range.start.offset, range.end.offset];
     }
     // Link format will insert text outside of anchor tag
     while (this.domNode.lastChild != null && this.domNode.lastChild !== this.textNode) {
@@ -818,15 +804,9 @@ class Cursor extends _parchment.EmbedBlot {
     }
     this.remove();
     if (start != null) {
-      var _map = [start, end].map(offset => {
+      [start, end] = [start, end].map(offset => {
         return Math.max(0, Math.min(restoreText.data.length, offset - 1));
       });
-
-      var _map2 = _slicedToArray(_map, 2);
-
-      start = _map2[0];
-      end = _map2[1];
-
       return {
         startNode: restoreText,
         startOffset: start,
@@ -869,9 +849,7 @@ exports.default = Cursor;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
 
@@ -968,9 +946,7 @@ exports.default = Embed;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
 
@@ -1037,11 +1013,7 @@ exports.default = Inline;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+exports.__esModule = true;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
 
@@ -1095,17 +1067,8 @@ class Scroll extends _parchment.ScrollBlot {
   }
 
   deleteAt(index, length) {
-    var _line = this.line(index),
-        _line2 = _slicedToArray(_line, 2);
-
-    const first = _line2[0],
-          offset = _line2[1];
-
-    var _line3 = this.line(index + length),
-        _line4 = _slicedToArray(_line3, 1);
-
-    const last = _line4[0];
-
+    const [first, offset] = this.line(index);
+    const [last] = this.line(index + length);
     super.deleteAt(index, length);
     if (last != null && first !== last && offset > 0) {
       if (first instanceof _block.BlockEmbed || last instanceof _block.BlockEmbed) {
@@ -1240,9 +1203,7 @@ exports.default = Scroll;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
 
@@ -1262,9 +1223,7 @@ exports.default = Text;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _quill = __webpack_require__(/*! ./core/quill */ "./core/quill.js");
 
@@ -1351,11 +1310,7 @@ exports.default = _quill2.default;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+exports.__esModule = true;
 
 var _clone = __webpack_require__(/*! clone */ "./node_modules/clone/clone.js");
 
@@ -1397,8 +1352,6 @@ var _text2 = _interopRequireDefault(_text);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
-
 const ASCII = /^[ -~]*$/;
 
 class Editor {
@@ -1427,20 +1380,10 @@ class Editor {
             consumeNextNewline = true;
           }
           this.scroll.insertAt(index, text);
-
-          var _scroll$line = this.scroll.line(index),
-              _scroll$line2 = _slicedToArray(_scroll$line, 2);
-
-          const line = _scroll$line2[0],
-                offset = _scroll$line2[1];
-
+          const [line, offset] = this.scroll.line(index);
           let formats = (0, _extend2.default)({}, (0, _block.bubbleFormats)(line));
           if (line instanceof _block2.default) {
-            var _line$descendant = line.descendant(_parchment.LeafBlot, offset),
-                _line$descendant2 = _slicedToArray(_line$descendant, 1);
-
-            const leaf = _line$descendant2[0];
-
+            const [leaf] = line.descendant(_parchment.LeafBlot, offset);
             formats = (0, _extend2.default)(formats, (0, _block.bubbleFormats)(leaf));
           }
           attributes = _op2.default.attributes.diff(formats, attributes) || {};
@@ -1508,10 +1451,7 @@ class Editor {
     let leaves = [];
     if (length === 0) {
       this.scroll.path(index).forEach(path => {
-        var _path = _slicedToArray(path, 1);
-
-        const blot = _path[0];
-
+        const [blot] = path;
         if (blot instanceof _block2.default) {
           lines.push(blot);
         } else if (blot instanceof _parchment.LeafBlot) {
@@ -1536,12 +1476,7 @@ class Editor {
   }
 
   getHTML(index, length) {
-    var _scroll$line3 = this.scroll.line(index),
-        _scroll$line4 = _slicedToArray(_scroll$line3, 2);
-
-    const line = _scroll$line4[0],
-          lineOffset = _scroll$line4[1];
-
+    const [line, lineOffset] = this.scroll.line(index);
     if (line.length() >= lineOffset + length) {
       return convertHTML(line, lineOffset, length, true);
     }
@@ -1577,13 +1512,7 @@ class Editor {
 
   removeFormat(index, length) {
     const text = this.getText(index, length);
-
-    var _scroll$line5 = this.scroll.line(index + length),
-        _scroll$line6 = _slicedToArray(_scroll$line5, 2);
-
-    const line = _scroll$line6[0],
-          offset = _scroll$line6[1];
-
+    const [line, offset] = this.scroll.line(index + length);
     let suffixLength = 0;
     let suffix = new _quillDelta2.default();
     if (line != null) {
@@ -1626,52 +1555,24 @@ class Editor {
 
 function convertListHTML(items, lastIndent, types) {
   if (items.length === 0) {
-    var _getListType = getListType(types.pop()),
-        _getListType2 = _slicedToArray(_getListType, 1);
-
-    const endTag = _getListType2[0];
-
+    const [endTag] = getListType(types.pop());
     if (lastIndent <= 0) {
       return `</li></${endTag}>`;
     }
     return `</li></${endTag}>${convertListHTML([], lastIndent - 1, types)}`;
   }
-
-  var _items = _toArray(items),
-      _items$ = _items[0];
-
-  const child = _items$.child,
-        offset = _items$.offset,
-        length = _items$.length,
-        indent = _items$.indent,
-        type = _items$.type,
-        rest = _items.slice(1);
-
-  var _getListType3 = getListType(type),
-      _getListType4 = _slicedToArray(_getListType3, 2);
-
-  const tag = _getListType4[0],
-        attribute = _getListType4[1];
-
+  const [{ child, offset, length, indent, type }, ...rest] = items;
+  const [tag, attribute] = getListType(type);
   if (indent > lastIndent) {
     types.push(tag);
     return `<${tag}><li${attribute}>${convertHTML(child, offset, length)}${convertListHTML(rest, indent, types)}`;
   } else if (indent === lastIndent) {
     return `</li><li${attribute}>${convertHTML(child, offset, length)}${convertListHTML(rest, indent, types)}`;
   } else if (indent === lastIndent - 1) {
-    var _getListType5 = getListType(types.pop()),
-        _getListType6 = _slicedToArray(_getListType5, 1);
-
-    const endTag = _getListType6[0];
-
+    const [endTag] = getListType(types.pop());
     return `</li></${endTag}></li><li${attribute}>${convertHTML(child, offset, length)}${convertListHTML(rest, indent, types)}`;
   }
-
-  var _getListType7 = getListType(types.pop()),
-      _getListType8 = _slicedToArray(_getListType7, 1);
-
-  const endTag = _getListType8[0];
-
+  const [endTag] = getListType(types.pop());
   return `</li></${endTag}>${convertListHTML(items, lastIndent - 1, types)}`;
 }
 
@@ -1703,16 +1604,8 @@ function convertHTML(blot, index, length, isRoot = false) {
     if (isRoot || blot.statics.blotName === 'list') {
       return parts.join('');
     }
-    var _blot$domNode = blot.domNode;
-    const outerHTML = _blot$domNode.outerHTML,
-          innerHTML = _blot$domNode.innerHTML;
-
-    var _outerHTML$split = outerHTML.split(`>${innerHTML}<`),
-        _outerHTML$split2 = _slicedToArray(_outerHTML$split, 2);
-
-    const start = _outerHTML$split2[0],
-          end = _outerHTML$split2[1];
-
+    const { outerHTML, innerHTML } = blot.domNode;
+    const [start, end] = outerHTML.split(`>${innerHTML}<`);
     return `${start}>${parts.join('')}<${end}`;
   }
   return blot.domNode.outerHTML;
@@ -1770,9 +1663,7 @@ exports.default = Editor;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _eventemitter = __webpack_require__(/*! eventemitter3 */ "./node_modules/eventemitter3/index.js");
 
@@ -1860,9 +1751,7 @@ exports.default = Emitter;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.default = new WeakMap();
 
 /***/ }),
@@ -1877,9 +1766,7 @@ exports.default = new WeakMap();
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 const levels = ['error', 'warn', 'log', 'info'];
 let level = 'warn';
 
@@ -1915,9 +1802,7 @@ exports.default = namespace;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 class Module {
   constructor(quill, options = {}) {
     this.quill = quill;
@@ -1940,12 +1825,8 @@ exports.default = Module;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.default = exports.overload = exports.expandConfig = exports.globalRegistry = undefined;
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _quillDelta = __webpack_require__(/*! quill-delta */ "./node_modules/quill-delta/lib/delta.js");
 
@@ -2111,14 +1992,7 @@ class Quill {
   }
 
   deleteText(index, length, source) {
-    var _overload = overload(index, length, source);
-
-    var _overload2 = _slicedToArray(_overload, 4);
-
-    index = _overload2[0];
-    length = _overload2[1];
-    source = _overload2[3];
-
+    [index, length,, source] = overload(index, length, source);
     return modify.call(this, () => {
       return this.editor.deleteText(index, length);
     }, source, index, -1 * length);
@@ -2134,8 +2008,7 @@ class Quill {
   }
 
   focus() {
-    const scrollTop = this.scrollingContainer.scrollTop;
-
+    const { scrollTop } = this.scrollingContainer;
     this.selection.focus();
     this.scrollingContainer.scrollTop = scrollTop;
     this.scrollIntoView();
@@ -2167,16 +2040,7 @@ class Quill {
   formatLine(index, length, name, value, source) {
     let formats;
     // eslint-disable-next-line prefer-const
-
-    var _overload3 = overload(index, length, name, value, source);
-
-    var _overload4 = _slicedToArray(_overload3, 4);
-
-    index = _overload4[0];
-    length = _overload4[1];
-    formats = _overload4[2];
-    source = _overload4[3];
-
+    [index, length, formats, source] = overload(index, length, name, value, source);
     return modify.call(this, () => {
       return this.editor.formatLine(index, length, formats);
     }, source, index, 0);
@@ -2185,16 +2049,7 @@ class Quill {
   formatText(index, length, name, value, source) {
     let formats;
     // eslint-disable-next-line prefer-const
-
-    var _overload5 = overload(index, length, name, value, source);
-
-    var _overload6 = _slicedToArray(_overload5, 4);
-
-    index = _overload6[0];
-    length = _overload6[1];
-    formats = _overload6[2];
-    source = _overload6[3];
-
+    [index, length, formats, source] = overload(index, length, name, value, source);
     return modify.call(this, () => {
       return this.editor.formatText(index, length, formats);
     }, source, index, 0);
@@ -2219,13 +2074,7 @@ class Quill {
   }
 
   getContents(index = 0, length = this.getLength() - index) {
-    var _overload7 = overload(index, length);
-
-    var _overload8 = _slicedToArray(_overload7, 2);
-
-    index = _overload8[0];
-    length = _overload8[1];
-
+    [index, length] = overload(index, length);
     return this.editor.getContents(index, length);
   }
 
@@ -2270,24 +2119,12 @@ class Quill {
   }
 
   getSemanticHTML(index = 0, length = this.getLength() - index) {
-    var _overload9 = overload(index, length);
-
-    var _overload10 = _slicedToArray(_overload9, 2);
-
-    index = _overload10[0];
-    length = _overload10[1];
-
+    [index, length] = overload(index, length);
     return this.editor.getHTML(index, length);
   }
 
   getText(index = 0, length = this.getLength() - index) {
-    var _overload11 = overload(index, length);
-
-    var _overload12 = _slicedToArray(_overload11, 2);
-
-    index = _overload12[0];
-    length = _overload12[1];
-
+    [index, length] = overload(index, length);
     return this.editor.getText(index, length);
   }
 
@@ -2304,15 +2141,7 @@ class Quill {
   insertText(index, text, name, value, source) {
     let formats;
     // eslint-disable-next-line prefer-const
-
-    var _overload13 = overload(index, 0, name, value, source);
-
-    var _overload14 = _slicedToArray(_overload13, 4);
-
-    index = _overload14[0];
-    formats = _overload14[2];
-    source = _overload14[3];
-
+    [index,, formats, source] = overload(index, 0, name, value, source);
     return modify.call(this, () => {
       return this.editor.insertText(index, text, formats);
     }, source, index, text.length);
@@ -2335,14 +2164,7 @@ class Quill {
   }
 
   removeFormat(index, length, source) {
-    var _overload15 = overload(index, length, source);
-
-    var _overload16 = _slicedToArray(_overload15, 4);
-
-    index = _overload16[0];
-    length = _overload16[1];
-    source = _overload16[3];
-
+    [index, length,, source] = overload(index, length, source);
     return modify.call(this, () => {
       return this.editor.removeFormat(index, length);
     }, source, index);
@@ -2371,14 +2193,7 @@ class Quill {
     if (index == null) {
       this.selection.setRange(null, length || Quill.sources.API);
     } else {
-      var _overload17 = overload(index, length, source);
-
-      var _overload18 = _slicedToArray(_overload17, 4);
-
-      index = _overload18[0];
-      length = _overload18[1];
-      source = _overload18[3];
-
+      [index, length,, source] = overload(index, length, source);
       this.selection.setRange(new _selection.Range(index, length), source);
       if (source !== _emitter2.default.sources.SILENT) {
         this.selection.scrollIntoView(this.scrollingContainer);
@@ -2555,25 +2370,15 @@ function shiftRange(range, index, length, source) {
   let start;
   let end;
   if (index instanceof _quillDelta2.default) {
-    var _map = [range.index, range.index + range.length].map(pos => index.transformPosition(pos, source !== _emitter2.default.sources.USER));
-
-    var _map2 = _slicedToArray(_map, 2);
-
-    start = _map2[0];
-    end = _map2[1];
+    [start, end] = [range.index, range.index + range.length].map(pos => index.transformPosition(pos, source !== _emitter2.default.sources.USER));
   } else {
-    var _map3 = [range.index, range.index + range.length].map(pos => {
+    [start, end] = [range.index, range.index + range.length].map(pos => {
       if (pos < index || pos === index && source === _emitter2.default.sources.USER) return pos;
       if (length >= 0) {
         return pos + length;
       }
       return Math.max(index, pos + length);
     });
-
-    var _map4 = _slicedToArray(_map3, 2);
-
-    start = _map4[0];
-    end = _map4[1];
   }
   return new _selection.Range(start, end - start);
 }
@@ -2595,12 +2400,8 @@ exports.default = Quill;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.default = exports.Range = undefined;
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
 
@@ -2665,12 +2466,7 @@ class Selection {
     });
     this.emitter.on(_emitter2.default.events.SCROLL_OPTIMIZE, (mutations, context) => {
       if (context.range) {
-        var _context$range = context.range;
-        const startNode = _context$range.startNode,
-              startOffset = _context$range.startOffset,
-              endNode = _context$range.endNode,
-              endOffset = _context$range.endOffset;
-
+        const { startNode, startOffset, endNode, endOffset } = context.range;
         this.setNativeRange(startNode, startOffset, endNode, endOffset);
         this.update(_emitter2.default.sources.SILENT);
       }
@@ -2737,42 +2533,15 @@ class Selection {
     index = Math.min(index, scrollLength - 1);
     length = Math.min(index + length, scrollLength - 1) - index;
     let node;
-
-    var _scroll$leaf = this.scroll.leaf(index),
-        _scroll$leaf2 = _slicedToArray(_scroll$leaf, 2);
-
-    let leaf = _scroll$leaf2[0],
-        offset = _scroll$leaf2[1];
-
+    let [leaf, offset] = this.scroll.leaf(index);
     if (leaf == null) return null;
-
-    var _leaf$position = leaf.position(offset, true);
-
-    var _leaf$position2 = _slicedToArray(_leaf$position, 2);
-
-    node = _leaf$position2[0];
-    offset = _leaf$position2[1];
-
+    [node, offset] = leaf.position(offset, true);
     const range = document.createRange();
     if (length > 0) {
       range.setStart(node, offset);
-
-      var _scroll$leaf3 = this.scroll.leaf(index + length);
-
-      var _scroll$leaf4 = _slicedToArray(_scroll$leaf3, 2);
-
-      leaf = _scroll$leaf4[0];
-      offset = _scroll$leaf4[1];
-
+      [leaf, offset] = this.scroll.leaf(index + length);
       if (leaf == null) return null;
-
-      var _leaf$position3 = leaf.position(offset, true);
-
-      var _leaf$position4 = _slicedToArray(_leaf$position3, 2);
-
-      node = _leaf$position4[0];
-      offset = _leaf$position4[1];
-
+      [node, offset] = leaf.position(offset, true);
       range.setEnd(node, offset);
       return range.getBoundingClientRect();
     }
@@ -2829,11 +2598,7 @@ class Selection {
       positions.push([range.end.node, range.end.offset]);
     }
     const indexes = positions.map(position => {
-      var _position = _slicedToArray(position, 2);
-
-      const node = _position[0],
-            offset = _position[1];
-
+      const [node, offset] = position;
       const blot = this.scroll.find(node, true);
       const index = blot.offset(this.scroll);
       if (offset === 0) {
@@ -2861,9 +2626,7 @@ class Selection {
       native: nativeRange
     };
     [range.start, range.end].forEach(position => {
-      let node = position.node,
-          offset = position.offset;
-
+      let { node, offset } = position;
       while (!(node instanceof Text) && node.childNodes.length > 0) {
         if (node.childNodes.length > offset) {
           node = node.childNodes[offset];
@@ -2895,19 +2658,8 @@ class Selection {
     const scrollLength = this.scroll.length();
     indexes.forEach((index, i) => {
       index = Math.min(scrollLength - 1, index);
-
-      var _scroll$leaf5 = this.scroll.leaf(index),
-          _scroll$leaf6 = _slicedToArray(_scroll$leaf5, 2);
-
-      const leaf = _scroll$leaf6[0],
-            leafOffset = _scroll$leaf6[1];
-
-      var _leaf$position5 = leaf.position(leafOffset, i !== 0),
-          _leaf$position6 = _slicedToArray(_leaf$position5, 2);
-
-      const node = _leaf$position6[0],
-            offset = _leaf$position6[1];
-
+      const [leaf, leafOffset] = this.scroll.leaf(index);
+      const [node, offset] = leaf.position(leafOffset, i !== 0);
       args.push(node, offset);
     });
     if (args.length < 2) {
@@ -2922,19 +2674,10 @@ class Selection {
     const bounds = this.getBounds(range.index, range.length);
     if (bounds == null) return;
     const limit = this.scroll.length() - 1;
-
-    var _scroll$line = this.scroll.line(Math.min(range.index, limit)),
-        _scroll$line2 = _slicedToArray(_scroll$line, 1);
-
-    const first = _scroll$line2[0];
-
+    const [first] = this.scroll.line(Math.min(range.index, limit));
     let last = first;
     if (range.length > 0) {
-      var _scroll$line3 = this.scroll.line(Math.min(range.index + range.length, limit));
-
-      var _scroll$line4 = _slicedToArray(_scroll$line3, 1);
-
-      last = _scroll$line4[0];
+      [last] = this.scroll.line(Math.min(range.index + range.length, limit));
     }
     if (first == null || last == null) return;
     const scrollBounds = scrollingContainer.getBoundingClientRect();
@@ -2954,11 +2697,7 @@ class Selection {
     if (selection == null) return;
     if (startNode != null) {
       if (!this.hasFocus()) this.root.focus();
-
-      var _ref = this.getNativeRange() || {};
-
-      const native = _ref.native;
-
+      const { native } = this.getNativeRange() || {};
       if (native == null || force || startNode !== native.startContainer || startOffset !== native.startOffset || endNode !== native.endContainer || endOffset !== native.endOffset) {
         if (startNode.tagName === 'BR') {
           startOffset = Array.from(startNode.parentNode.childNodes).indexOf(startNode);
@@ -2997,13 +2736,7 @@ class Selection {
 
   update(source = _emitter2.default.sources.USER) {
     const oldRange = this.lastRange;
-
-    var _getRange = this.getRange(),
-        _getRange2 = _slicedToArray(_getRange, 2);
-
-    const lastRange = _getRange2[0],
-          nativeRange = _getRange2[1];
-
+    const [lastRange, nativeRange] = this.getRange();
     this.lastRange = lastRange;
     if (this.lastRange != null) {
       this.savedRange = this.lastRange;
@@ -3046,9 +2779,7 @@ exports.default = Selection;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 class Theme {
   constructor(quill, options) {
     this.quill = quill;
@@ -3091,9 +2822,7 @@ exports.default = Theme;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.AlignStyle = exports.AlignClass = exports.AlignAttribute = undefined;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
@@ -3123,9 +2852,7 @@ exports.AlignStyle = AlignStyle;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.BackgroundStyle = exports.BackgroundClass = undefined;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
@@ -3154,9 +2881,7 @@ exports.BackgroundStyle = BackgroundStyle;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _block = __webpack_require__(/*! ../blots/block */ "./blots/block.js");
 
@@ -3182,9 +2907,7 @@ exports.default = Blockquote;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _inline = __webpack_require__(/*! ../blots/inline */ "./blots/inline.js");
 
@@ -3225,9 +2948,7 @@ exports.default = Bold;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.default = exports.CodeBlockContainer = exports.Code = undefined;
 
 var _block = __webpack_require__(/*! ../blots/block */ "./blots/block.js");
@@ -3312,9 +3033,7 @@ exports.default = CodeBlock;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.ColorStyle = exports.ColorClass = exports.ColorAttributor = undefined;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
@@ -3352,9 +3071,7 @@ exports.ColorStyle = ColorStyle;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.DirectionStyle = exports.DirectionClass = exports.DirectionAttribute = undefined;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
@@ -3384,9 +3101,7 @@ exports.DirectionStyle = DirectionStyle;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.FontClass = exports.FontStyle = undefined;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
@@ -3421,9 +3136,7 @@ exports.FontClass = FontClass;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _embed = __webpack_require__(/*! ../blots/embed */ "./blots/embed.js");
 
@@ -3452,10 +3165,7 @@ class Formula extends _embed2.default {
   }
 
   html() {
-    var _value = this.value();
-
-    const formula = _value.formula;
-
+    const { formula } = this.value();
     return `<span>${formula}</span>`;
   }
 }
@@ -3477,9 +3187,7 @@ exports.default = Formula;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _block = __webpack_require__(/*! ../blots/block */ "./blots/block.js");
 
@@ -3509,9 +3217,7 @@ exports.default = Header;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
 
@@ -3588,9 +3294,7 @@ exports.default = Image;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
 
@@ -3635,9 +3339,7 @@ exports.default = IndentClass;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _bold = __webpack_require__(/*! ./bold */ "./formats/bold.js");
 
@@ -3663,9 +3365,7 @@ exports.default = Italic;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.sanitize = exports.default = undefined;
 
 var _inline = __webpack_require__(/*! ../blots/inline */ "./blots/inline.js");
@@ -3725,9 +3425,7 @@ exports.sanitize = sanitize;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.default = exports.ListContainer = undefined;
 
 var _block = __webpack_require__(/*! ../blots/block */ "./blots/block.js");
@@ -3807,9 +3505,7 @@ exports.default = ListItem;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _inline = __webpack_require__(/*! ../blots/inline */ "./blots/inline.js");
 
@@ -3850,9 +3546,7 @@ exports.default = Script;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.SizeStyle = exports.SizeClass = undefined;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
@@ -3881,9 +3575,7 @@ exports.SizeStyle = SizeStyle;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _inline = __webpack_require__(/*! ../blots/inline */ "./blots/inline.js");
 
@@ -3909,12 +3601,8 @@ exports.default = Strike;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.tableId = exports.TableContainer = exports.TableBody = exports.TableRow = exports.TableCell = undefined;
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _block = __webpack_require__(/*! ../blots/block */ "./blots/block.js");
 
@@ -4021,11 +3709,7 @@ class TableContainer extends _container2.default {
   }
 
   deleteColumn(index) {
-    var _descendant = this.descendant(TableBody),
-        _descendant2 = _slicedToArray(_descendant, 1);
-
-    const body = _descendant2[0];
-
+    const [body] = this.descendant(TableBody);
     if (body == null || body.children.head == null) return;
     body.children.forEach(row => {
       const cell = row.children.at(index);
@@ -4036,11 +3720,7 @@ class TableContainer extends _container2.default {
   }
 
   insertColumn(index) {
-    var _descendant3 = this.descendant(TableBody),
-        _descendant4 = _slicedToArray(_descendant3, 1);
-
-    const body = _descendant4[0];
-
+    const [body] = this.descendant(TableBody);
     if (body == null || body.children.head == null) return;
     body.children.forEach(row => {
       const ref = row.children.at(index);
@@ -4051,11 +3731,7 @@ class TableContainer extends _container2.default {
   }
 
   insertRow(index) {
-    var _descendant5 = this.descendant(TableBody),
-        _descendant6 = _slicedToArray(_descendant5, 1);
-
-    const body = _descendant6[0];
-
+    const [body] = this.descendant(TableBody);
     if (body == null || body.children.head == null) return;
     const id = tableId();
     const row = this.scroll.create(TableRow.blotName);
@@ -4102,9 +3778,7 @@ exports.tableId = tableId;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _inline = __webpack_require__(/*! ../blots/inline */ "./blots/inline.js");
 
@@ -4130,9 +3804,7 @@ exports.default = Underline;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _block = __webpack_require__(/*! ../blots/block */ "./blots/block.js");
 
@@ -4183,10 +3855,7 @@ class Video extends _block.BlockEmbed {
   }
 
   html() {
-    var _value = this.value();
-
-    const video = _value.video;
-
+    const { video } = this.value();
     return `<a href="${video}">${video}</a>`;
   }
 }
@@ -4208,12 +3877,8 @@ exports.default = Video;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.traverse = exports.matchText = exports.matchNewline = exports.matchBlot = exports.matchAttributor = exports.default = undefined;
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _extend = __webpack_require__(/*! extend */ "./node_modules/extend/index.js");
 
@@ -4297,13 +3962,7 @@ class Clipboard extends _module2.default {
     const container = this.quill.root.ownerDocument.createElement('div');
     container.innerHTML = html.replace(/>\r?\n +</g, '><'); // Remove spaces between tags
     const nodeMatches = new WeakMap();
-
-    var _prepareMatching = this.prepareMatching(container, nodeMatches),
-        _prepareMatching2 = _slicedToArray(_prepareMatching, 2);
-
-    const elementMatchers = _prepareMatching2[0],
-          textMatchers = _prepareMatching2[1];
-
+    const [elementMatchers, textMatchers] = this.prepareMatching(container, nodeMatches);
     const delta = traverse(this.quill.scroll, container, elementMatchers, textMatchers, nodeMatches);
     // Remove trailing newline
     if (deltaEndsWith(delta, '\n') && delta.ops[delta.ops.length - 1].attributes == null) {
@@ -4327,12 +3986,7 @@ class Clipboard extends _module2.default {
   onCaptureCopy(e) {
     if (e.defaultPrevented) return;
     this.quill.update();
-
-    var _quill$selection$getR = this.quill.selection.getRange(),
-        _quill$selection$getR2 = _slicedToArray(_quill$selection$getR, 1);
-
-    const range = _quill$selection$getR2[0];
-
+    const [range] = this.quill.selection.getRange();
     if (range) {
       this.onCopy(e, range);
       e.preventDefault();
@@ -4342,12 +3996,7 @@ class Clipboard extends _module2.default {
   onCaptureCut(e) {
     if (e.defaultPrevented) return;
     this.quill.update();
-
-    var _quill$selection$getR3 = this.quill.selection.getRange(),
-        _quill$selection$getR4 = _slicedToArray(_quill$selection$getR3, 1);
-
-    const range = _quill$selection$getR4[0];
-
+    const [range] = this.quill.selection.getRange();
     if (range) {
       this.onCopy(e, range);
       this.quill.deleteText(range, _quill2.default.sources.USER);
@@ -4390,11 +4039,7 @@ class Clipboard extends _module2.default {
     const elementMatchers = [];
     const textMatchers = [];
     this.matchers.forEach(pair => {
-      var _pair = _slicedToArray(pair, 2);
-
-      const selector = _pair[0],
-            matcher = _pair[1];
-
+      const [selector, matcher] = pair;
       switch (selector) {
         case Node.TEXT_NODE:
           textMatchers.push(matcher);
@@ -4653,9 +4298,7 @@ exports.traverse = traverse;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.getLastChangeIndex = exports.default = undefined;
 
 var _parchment = __webpack_require__(/*! parchment */ "./node_modules/parchment/src/parchment.ts");
@@ -4797,12 +4440,8 @@ exports.getLastChangeIndex = getLastChangeIndex;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.normalize = exports.SHORTKEY = exports.default = undefined;
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _clone = __webpack_require__(/*! clone */ "./node_modules/clone/clone.js");
 
@@ -4912,25 +4551,9 @@ class Keyboard extends _module2.default {
       if (matches.length === 0) return;
       const range = this.quill.getSelection();
       if (range == null || !this.quill.hasFocus()) return;
-
-      var _quill$getLine = this.quill.getLine(range.index),
-          _quill$getLine2 = _slicedToArray(_quill$getLine, 2);
-
-      const line = _quill$getLine2[0],
-            offset = _quill$getLine2[1];
-
-      var _quill$getLeaf = this.quill.getLeaf(range.index),
-          _quill$getLeaf2 = _slicedToArray(_quill$getLeaf, 2);
-
-      const leafStart = _quill$getLeaf2[0],
-            offsetStart = _quill$getLeaf2[1];
-
-      var _ref = range.length === 0 ? [leafStart, offsetStart] : this.quill.getLeaf(range.index + range.length),
-          _ref2 = _slicedToArray(_ref, 2);
-
-      const leafEnd = _ref2[0],
-            offsetEnd = _ref2[1];
-
+      const [line, offset] = this.quill.getLine(range.index);
+      const [leafStart, offsetStart] = this.quill.getLeaf(range.index);
+      const [leafEnd, offsetEnd] = range.length === 0 ? [leafStart, offsetStart] : this.quill.getLeaf(range.index + range.length);
       const prefixText = leafStart instanceof _parchment.TextBlot ? leafStart.value().slice(0, offsetStart) : '';
       const suffixText = leafEnd instanceof _parchment.TextBlot ? leafEnd.value().slice(offsetEnd) : '';
       const curContext = {
@@ -5075,12 +4698,7 @@ Keyboard.DEFAULTS = {
       collapsed: true,
       format: { list: 'checked' },
       handler(range) {
-        var _quill$getLine3 = this.quill.getLine(range.index),
-            _quill$getLine4 = _slicedToArray(_quill$getLine3, 2);
-
-        const line = _quill$getLine4[0],
-              offset = _quill$getLine4[1];
-
+        const [line, offset] = this.quill.getLine(range.index);
         const formats = (0, _extend2.default)({}, line.formats(), { list: 'checked' });
         const delta = new _quillDelta2.default().retain(range.index).insert('\n', formats).retain(line.length() - offset - 1).retain(1, { list: 'unchecked' });
         this.quill.updateContents(delta, _quill2.default.sources.USER);
@@ -5094,12 +4712,7 @@ Keyboard.DEFAULTS = {
       format: ['header'],
       suffix: /^$/,
       handler(range, context) {
-        var _quill$getLine5 = this.quill.getLine(range.index),
-            _quill$getLine6 = _slicedToArray(_quill$getLine5, 2);
-
-        const line = _quill$getLine6[0],
-              offset = _quill$getLine6[1];
-
+        const [line, offset] = this.quill.getLine(range.index);
         const delta = new _quillDelta2.default().retain(range.index).insert('\n', context.format).retain(line.length() - offset - 1).retain(1, { header: null });
         this.quill.updateContents(delta, _quill2.default.sources.USER);
         this.quill.setSelection(range.index + 1, _quill2.default.sources.SILENT);
@@ -5126,14 +4739,7 @@ Keyboard.DEFAULTS = {
       handler(range) {
         const module = this.quill.getModule('table');
         if (module) {
-          var _module$getTable = module.getTable(range),
-              _module$getTable2 = _slicedToArray(_module$getTable, 4);
-
-          const table = _module$getTable2[0],
-                row = _module$getTable2[1],
-                cell = _module$getTable2[2],
-                offset = _module$getTable2[3];
-
+          const [table, row, cell, offset] = module.getTable(range);
           const shift = tableSide(table, row, cell, offset);
           if (shift == null) return;
           let index = table.offset();
@@ -5163,14 +4769,8 @@ Keyboard.DEFAULTS = {
       prefix: /^\s*?(\d+\.|-|\*|\[ ?\]|\[x\])$/,
       handler(range, context) {
         if (this.quill.scroll.query('list') == null) return true;
-        const length = context.prefix.length;
-
-        var _quill$getLine7 = this.quill.getLine(range.index),
-            _quill$getLine8 = _slicedToArray(_quill$getLine7, 2);
-
-        const line = _quill$getLine8[0],
-              offset = _quill$getLine8[1];
-
+        const { length } = context.prefix;
+        const [line, offset] = this.quill.getLine(range.index);
         if (offset > length) return true;
         let value;
         switch (context.prefix.trim()) {
@@ -5204,12 +4804,7 @@ Keyboard.DEFAULTS = {
       prefix: /^$/,
       suffix: /^\s*$/,
       handler(range) {
-        var _quill$getLine9 = this.quill.getLine(range.index),
-            _quill$getLine10 = _slicedToArray(_quill$getLine9, 2);
-
-        const line = _quill$getLine10[0],
-              offset = _quill$getLine10[1];
-
+        const [line, offset] = this.quill.getLine(range.index);
         let numLines = 2;
         let cur = line;
         while (cur != null && cur.length() <= 1 && cur.formats()['code-block']) {
@@ -5237,19 +4832,10 @@ Keyboard.DEFAULTS = {
 
 function handleBackspace(range, context) {
   if (range.index === 0 || this.quill.getLength() <= 1) return;
-
-  var _quill$getLine11 = this.quill.getLine(range.index),
-      _quill$getLine12 = _slicedToArray(_quill$getLine11, 1);
-
-  const line = _quill$getLine12[0];
-
+  const [line] = this.quill.getLine(range.index);
   let formats = {};
   if (context.offset === 0) {
-    var _quill$getLine13 = this.quill.getLine(range.index - 1),
-        _quill$getLine14 = _slicedToArray(_quill$getLine13, 1);
-
-    const prev = _quill$getLine14[0];
-
+    const [prev] = this.quill.getLine(range.index - 1);
     if (prev != null) {
       if (prev.statics.blotName === 'table') {
         this.quill.setSelection(range.index - 1, _quill2.default.sources.USER);
@@ -5276,18 +4862,9 @@ function handleDelete(range, context) {
   if (range.index >= this.quill.getLength() - length) return;
   let formats = {};
   let nextLength = 0;
-
-  var _quill$getLine15 = this.quill.getLine(range.index),
-      _quill$getLine16 = _slicedToArray(_quill$getLine15, 1);
-
-  const line = _quill$getLine16[0];
-
+  const [line] = this.quill.getLine(range.index);
   if (context.offset >= line.length() - 1) {
-    var _quill$getLine17 = this.quill.getLine(range.index + 1),
-        _quill$getLine18 = _slicedToArray(_quill$getLine17, 1);
-
-    const next = _quill$getLine18[0];
-
+    const [next] = this.quill.getLine(range.index + 1);
     if (next) {
       if (next.statics.blotName === 'table') {
         this.quill.setSelection(range.index + 1, _quill2.default.sources.USER);
@@ -5353,9 +4930,7 @@ function makeCodeBlockHandler(indent) {
     handler(range) {
       const CodeBlock = this.quill.scroll.query('code-block');
       const lines = range.length === 0 ? this.quill.getLines(range.index, 1) : this.quill.getLines(range);
-      let index = range.index,
-          length = range.length;
-
+      let { index, length } = range;
       lines.forEach((line, i) => {
         if (indent) {
           line.insertAt(0, CodeBlock.TAB);
@@ -5387,17 +4962,11 @@ function makeEmbedArrowHandler(key, shiftKey) {
     altKey: null,
     [where]: /^$/,
     handler(range) {
-      let index = range.index;
-
+      let { index } = range;
       if (key === 'ArrowRight') {
         index += range.length + 1;
       }
-
-      var _quill$getLeaf3 = this.quill.getLeaf(index),
-          _quill$getLeaf4 = _slicedToArray(_quill$getLeaf3, 1);
-
-      const leaf = _quill$getLeaf4[0];
-
+      const [leaf] = this.quill.getLeaf(index);
       if (!(leaf instanceof _parchment.EmbedBlot)) return true;
       if (key === 'ArrowLeft') {
         if (shiftKey) {
@@ -5506,9 +5075,7 @@ exports.normalize = normalize;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.default = exports.CodeToken = exports.CodeBlock = undefined;
 
 var _quillDelta = __webpack_require__(/*! quill-delta */ "./node_modules/quill-delta/lib/delta.js");
@@ -5824,11 +5391,7 @@ exports.default = Syntax;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+exports.__esModule = true;
 
 var _quillDelta = __webpack_require__(/*! quill-delta */ "./node_modules/quill-delta/lib/delta.js");
 
@@ -5860,13 +5423,7 @@ class Table extends _module2.default {
   }
 
   deleteColumn() {
-    var _getTable = this.getTable(),
-        _getTable2 = _slicedToArray(_getTable, 3);
-
-    const table = _getTable2[0],
-          row = _getTable2[1],
-          cell = _getTable2[2];
-
+    const [table, row, cell] = this.getTable();
     if (cell == null) return;
     const column = row.children.indexOf(cell);
     table.deleteColumn(column);
@@ -5874,22 +5431,14 @@ class Table extends _module2.default {
   }
 
   deleteRow() {
-    var _getTable3 = this.getTable(),
-        _getTable4 = _slicedToArray(_getTable3, 2);
-
-    const row = _getTable4[1];
-
+    const [, row] = this.getTable();
     if (row == null) return;
     row.remove();
     this.quill.update(_quill2.default.sources.USER);
   }
 
   deleteTable() {
-    var _getTable5 = this.getTable(),
-        _getTable6 = _slicedToArray(_getTable5, 1);
-
-    const table = _getTable6[0];
-
+    const [table] = this.getTable();
     if (table == null) return;
     const offset = table.offset();
     table.remove();
@@ -5899,13 +5448,7 @@ class Table extends _module2.default {
 
   getTable(range = this.quill.getSelection()) {
     if (range == null) return [null, null, null, -1];
-
-    var _quill$getLine = this.quill.getLine(range.index),
-        _quill$getLine2 = _slicedToArray(_quill$getLine, 2);
-
-    const cell = _quill$getLine2[0],
-          offset = _quill$getLine2[1];
-
+    const [cell, offset] = this.quill.getLine(range.index);
     if (cell == null || cell.statics.blotName !== _table.TableCell.blotName) {
       return [null, null, null, -1];
     }
@@ -5916,14 +5459,7 @@ class Table extends _module2.default {
 
   insertColumn(offset) {
     const range = this.quill.getSelection();
-
-    var _getTable7 = this.getTable(range),
-        _getTable8 = _slicedToArray(_getTable7, 3);
-
-    const table = _getTable8[0],
-          row = _getTable8[1],
-          cell = _getTable8[2];
-
+    const [table, row, cell] = this.getTable(range);
     if (cell == null) return;
     const column = row.children.offset(cell);
     table.insertColumn(column + offset);
@@ -5945,14 +5481,7 @@ class Table extends _module2.default {
 
   insertRow(offset) {
     const range = this.quill.getSelection();
-
-    var _getTable9 = this.getTable(range),
-        _getTable10 = _slicedToArray(_getTable9, 3);
-
-    const table = _getTable10[0],
-          row = _getTable10[1],
-          cell = _getTable10[2];
-
+    const [table, row, cell] = this.getTable(range);
     if (cell == null) return;
     const index = row.parent.children.indexOf(row);
     table.insertRow(index + offset);
@@ -6015,12 +5544,8 @@ exports.default = Table;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.addControls = exports.default = undefined;
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _quillDelta = __webpack_require__(/*! quill-delta */ "./node_modules/quill-delta/lib/delta.js");
 
@@ -6075,11 +5600,7 @@ class Toolbar extends _module2.default {
       }
     });
     this.quill.on(_quill2.default.events.SCROLL_OPTIMIZE, () => {
-      var _quill$selection$getR = this.quill.selection.getRange(),
-          _quill$selection$getR2 = _slicedToArray(_quill$selection$getR, 1);
-
-      const range = _quill$selection$getR2[0]; // quill.getSelection triggers update
-
+      const [range] = this.quill.selection.getRange(); // quill.getSelection triggers update
       this.update(range);
     });
   }
@@ -6121,12 +5642,7 @@ class Toolbar extends _module2.default {
         e.preventDefault();
       }
       this.quill.focus();
-
-      var _quill$selection$getR3 = this.quill.selection.getRange(),
-          _quill$selection$getR4 = _slicedToArray(_quill$selection$getR3, 1);
-
-      const range = _quill$selection$getR4[0];
-
+      const [range] = this.quill.selection.getRange();
       if (this.handlers[format] != null) {
         this.handlers[format].call(this, value);
       } else if (this.quill.scroll.query(format).prototype instanceof _parchment.EmbedBlot) {
@@ -6144,11 +5660,7 @@ class Toolbar extends _module2.default {
   update(range) {
     const formats = range == null ? {} : this.quill.getFormat(range);
     this.controls.forEach(pair => {
-      var _pair = _slicedToArray(pair, 2);
-
-      const format = _pair[0],
-            input = _pair[1];
-
+      const [format, input] = pair;
       if (input.tagName === 'SELECT') {
         let option;
         if (range == null) {
@@ -6251,10 +5763,7 @@ Toolbar.DEFAULTS = {
       }
     },
     direction(value) {
-      var _quill$getFormat = this.quill.getFormat();
-
-      const align = _quill$getFormat.align;
-
+      const { align } = this.quill.getFormat();
       if (value === 'rtl' && align == null) {
         this.quill.format('align', 'right', _quill2.default.sources.USER);
       } else if (!value && align === 'right') {
@@ -6309,9 +5818,7 @@ exports.addControls = addControls;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _quillDelta = __webpack_require__(/*! quill-delta */ "./node_modules/quill-delta/lib/delta.js");
 
@@ -34034,17 +33541,14 @@ module.exports = function isArguments(value) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Attributor; });
 /* harmony import */ var _scope__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scope */ "./node_modules/parchment/src/scope.ts");
 
-class Attributor {
-    static keys(node) {
-        return Array.from(node.attributes).map((item) => item.name);
-    }
-    constructor(attrName, keyName, options = {}) {
+var Attributor = /** @class */ (function () {
+    function Attributor(attrName, keyName, options) {
+        if (options === void 0) { options = {}; }
         this.attrName = attrName;
         this.keyName = keyName;
-        const attributeBit = _scope__WEBPACK_IMPORTED_MODULE_0__["default"].TYPE & _scope__WEBPACK_IMPORTED_MODULE_0__["default"].ATTRIBUTE;
+        var attributeBit = _scope__WEBPACK_IMPORTED_MODULE_0__["default"].TYPE & _scope__WEBPACK_IMPORTED_MODULE_0__["default"].ATTRIBUTE;
         this.scope =
             options.scope != null
                 ? // Ignore type bits, force attribute bit
@@ -34054,14 +33558,17 @@ class Attributor {
             this.whitelist = options.whitelist;
         }
     }
-    add(node, value) {
+    Attributor.keys = function (node) {
+        return Array.from(node.attributes).map(function (item) { return item.name; });
+    };
+    Attributor.prototype.add = function (node, value) {
         if (!this.canAdd(node, value)) {
             return false;
         }
         node.setAttribute(this.keyName, value);
         return true;
-    }
-    canAdd(_node, value) {
+    };
+    Attributor.prototype.canAdd = function (_node, value) {
         if (this.whitelist == null) {
             return true;
         }
@@ -34071,18 +33578,20 @@ class Attributor {
         else {
             return this.whitelist.indexOf(value) > -1;
         }
-    }
-    remove(node) {
+    };
+    Attributor.prototype.remove = function (node) {
         node.removeAttribute(this.keyName);
-    }
-    value(node) {
-        const value = node.getAttribute(this.keyName);
+    };
+    Attributor.prototype.value = function (node) {
+        var value = node.getAttribute(this.keyName);
         if (this.canAdd(node, value) && value) {
             return value;
         }
         return '';
-    }
-}
+    };
+    return Attributor;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (Attributor);
 
 
 /***/ }),
@@ -34097,43 +33606,60 @@ class Attributor {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _attributor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./attributor */ "./node_modules/parchment/src/attributor/attributor.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
 function match(node, prefix) {
-    const className = node.getAttribute('class') || '';
+    var className = node.getAttribute('class') || '';
     return className
         .split(/\s+/)
-        .filter(name => name.indexOf(`${prefix}-`) === 0);
+        .filter(function (name) { return name.indexOf(prefix + "-") === 0; });
 }
-class ClassAttributor extends _attributor__WEBPACK_IMPORTED_MODULE_0__["default"] {
-    static keys(node) {
-        return (node.getAttribute('class') || '').split(/\s+/).map(name => name
-            .split('-')
-            .slice(0, -1)
-            .join('-'));
+var ClassAttributor = /** @class */ (function (_super) {
+    __extends(ClassAttributor, _super);
+    function ClassAttributor() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    add(node, value) {
+    ClassAttributor.keys = function (node) {
+        return (node.getAttribute('class') || '').split(/\s+/).map(function (name) {
+            return name
+                .split('-')
+                .slice(0, -1)
+                .join('-');
+        });
+    };
+    ClassAttributor.prototype.add = function (node, value) {
         if (!this.canAdd(node, value)) {
             return false;
         }
         this.remove(node);
-        node.classList.add(`${this.keyName}-${value}`);
+        node.classList.add(this.keyName + "-" + value);
         return true;
-    }
-    remove(node) {
-        const matches = match(node, this.keyName);
-        matches.forEach(name => {
+    };
+    ClassAttributor.prototype.remove = function (node) {
+        var matches = match(node, this.keyName);
+        matches.forEach(function (name) {
             node.classList.remove(name);
         });
         if (node.classList.length === 0) {
             node.removeAttribute('class');
         }
-    }
-    value(node) {
-        const result = match(node, this.keyName)[0] || '';
-        const value = result.slice(this.keyName.length + 1); // +1 for hyphen
+    };
+    ClassAttributor.prototype.value = function (node) {
+        var result = match(node, this.keyName)[0] || '';
+        var value = result.slice(this.keyName.length + 1); // +1 for hyphen
         return this.canAdd(node, value) ? value : '';
-    }
-}
+    };
+    return ClassAttributor;
+}(_attributor__WEBPACK_IMPORTED_MODULE_0__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (ClassAttributor);
 
 
@@ -34158,13 +33684,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class AttributorStore {
-    constructor(domNode) {
+var AttributorStore = /** @class */ (function () {
+    function AttributorStore(domNode) {
         this.attributes = {};
         this.domNode = domNode;
         this.build();
     }
-    attribute(attribute, value) {
+    AttributorStore.prototype.attribute = function (attribute, value) {
         // verb
         if (value) {
             if (attribute.add(this.domNode, value)) {
@@ -34180,46 +33706,51 @@ class AttributorStore {
             attribute.remove(this.domNode);
             delete this.attributes[attribute.attrName];
         }
-    }
-    build() {
+    };
+    AttributorStore.prototype.build = function () {
+        var _this = this;
         this.attributes = {};
-        const blot = _registry__WEBPACK_IMPORTED_MODULE_0__["default"].find(this.domNode);
+        var blot = _registry__WEBPACK_IMPORTED_MODULE_0__["default"].find(this.domNode);
         if (blot == null) {
             return;
         }
-        const attributes = _attributor__WEBPACK_IMPORTED_MODULE_2__["default"].keys(this.domNode);
-        const classes = _class__WEBPACK_IMPORTED_MODULE_3__["default"].keys(this.domNode);
-        const styles = _style__WEBPACK_IMPORTED_MODULE_4__["default"].keys(this.domNode);
+        var attributes = _attributor__WEBPACK_IMPORTED_MODULE_2__["default"].keys(this.domNode);
+        var classes = _class__WEBPACK_IMPORTED_MODULE_3__["default"].keys(this.domNode);
+        var styles = _style__WEBPACK_IMPORTED_MODULE_4__["default"].keys(this.domNode);
         attributes
             .concat(classes)
             .concat(styles)
-            .forEach(name => {
-            const attr = blot.scroll.query(name, _scope__WEBPACK_IMPORTED_MODULE_1__["default"].ATTRIBUTE);
+            .forEach(function (name) {
+            var attr = blot.scroll.query(name, _scope__WEBPACK_IMPORTED_MODULE_1__["default"].ATTRIBUTE);
             if (attr instanceof _attributor__WEBPACK_IMPORTED_MODULE_2__["default"]) {
-                this.attributes[attr.attrName] = attr;
+                _this.attributes[attr.attrName] = attr;
             }
         });
-    }
-    copy(target) {
-        Object.keys(this.attributes).forEach(key => {
-            const value = this.attributes[key].value(this.domNode);
+    };
+    AttributorStore.prototype.copy = function (target) {
+        var _this = this;
+        Object.keys(this.attributes).forEach(function (key) {
+            var value = _this.attributes[key].value(_this.domNode);
             target.format(key, value);
         });
-    }
-    move(target) {
+    };
+    AttributorStore.prototype.move = function (target) {
+        var _this = this;
         this.copy(target);
-        Object.keys(this.attributes).forEach(key => {
-            this.attributes[key].remove(this.domNode);
+        Object.keys(this.attributes).forEach(function (key) {
+            _this.attributes[key].remove(_this.domNode);
         });
         this.attributes = {};
-    }
-    values() {
-        return Object.keys(this.attributes).reduce((attributes, name) => {
-            attributes[name] = this.attributes[name].value(this.domNode);
+    };
+    AttributorStore.prototype.values = function () {
+        var _this = this;
+        return Object.keys(this.attributes).reduce(function (attributes, name) {
+            attributes[name] = _this.attributes[name].value(_this.domNode);
             return attributes;
         }, {});
-    }
-}
+    };
+    return AttributorStore;
+}());
 /* harmony default export */ __webpack_exports__["default"] = (AttributorStore);
 
 
@@ -34235,43 +33766,58 @@ class AttributorStore {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _attributor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./attributor */ "./node_modules/parchment/src/attributor/attributor.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
 function camelize(name) {
-    const parts = name.split('-');
-    const rest = parts
+    var parts = name.split('-');
+    var rest = parts
         .slice(1)
-        .map((part) => part[0].toUpperCase() + part.slice(1))
+        .map(function (part) { return part[0].toUpperCase() + part.slice(1); })
         .join('');
     return parts[0] + rest;
 }
-class StyleAttributor extends _attributor__WEBPACK_IMPORTED_MODULE_0__["default"] {
-    static keys(node) {
-        return (node.getAttribute('style') || '').split(';').map(value => {
-            const arr = value.split(':');
+var StyleAttributor = /** @class */ (function (_super) {
+    __extends(StyleAttributor, _super);
+    function StyleAttributor() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    StyleAttributor.keys = function (node) {
+        return (node.getAttribute('style') || '').split(';').map(function (value) {
+            var arr = value.split(':');
             return arr[0].trim();
         });
-    }
-    add(node, value) {
+    };
+    StyleAttributor.prototype.add = function (node, value) {
         if (!this.canAdd(node, value)) {
             return false;
         }
         // @ts-ignore
         node.style[camelize(this.keyName)] = value;
         return true;
-    }
-    remove(node) {
+    };
+    StyleAttributor.prototype.remove = function (node) {
         // @ts-ignore
         node.style[camelize(this.keyName)] = '';
         if (!node.getAttribute('style')) {
             node.removeAttribute('style');
         }
-    }
-    value(node) {
+    };
+    StyleAttributor.prototype.value = function (node) {
         // @ts-ignore
-        const value = node.style[camelize(this.keyName)];
+        var value = node.style[camelize(this.keyName)];
         return this.canAdd(node, value) ? value : '';
-    }
-}
+    };
+    return StyleAttributor;
+}(_attributor__WEBPACK_IMPORTED_MODULE_0__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (StyleAttributor);
 
 
@@ -34288,34 +33834,49 @@ class StyleAttributor extends _attributor__WEBPACK_IMPORTED_MODULE_0__["default"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scope__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../scope */ "./node_modules/parchment/src/scope.ts");
 /* harmony import */ var _parent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parent */ "./node_modules/parchment/src/blot/abstract/parent.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
 
-class ContainerBlot extends _parent__WEBPACK_IMPORTED_MODULE_1__["default"] {
-    checkMerge() {
+var ContainerBlot = /** @class */ (function (_super) {
+    __extends(ContainerBlot, _super);
+    function ContainerBlot() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ContainerBlot.prototype.checkMerge = function () {
         return (this.next !== null && this.next.statics.blotName === this.statics.blotName);
-    }
-    deleteAt(index, length) {
-        super.deleteAt(index, length);
+    };
+    ContainerBlot.prototype.deleteAt = function (index, length) {
+        _super.prototype.deleteAt.call(this, index, length);
         this.enforceAllowedChildren();
-    }
-    formatAt(index, length, name, value) {
-        super.formatAt(index, length, name, value);
+    };
+    ContainerBlot.prototype.formatAt = function (index, length, name, value) {
+        _super.prototype.formatAt.call(this, index, length, name, value);
         this.enforceAllowedChildren();
-    }
-    insertAt(index, value, def) {
-        super.insertAt(index, value, def);
+    };
+    ContainerBlot.prototype.insertAt = function (index, value, def) {
+        _super.prototype.insertAt.call(this, index, value, def);
         this.enforceAllowedChildren();
-    }
-    optimize(context) {
-        super.optimize(context);
+    };
+    ContainerBlot.prototype.optimize = function (context) {
+        _super.prototype.optimize.call(this, context);
         if (this.children.length > 0 && this.next != null && this.checkMerge()) {
             this.next.moveChildren(this);
             this.next.remove();
         }
-    }
-}
-ContainerBlot.blotName = 'container';
-ContainerBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_0__["default"].BLOCK_BLOT;
+    };
+    ContainerBlot.blotName = 'container';
+    ContainerBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_0__["default"].BLOCK_BLOT;
+    return ContainerBlot;
+}(_parent__WEBPACK_IMPORTED_MODULE_1__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (ContainerBlot);
 
 
@@ -34332,35 +33893,51 @@ ContainerBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_0__["default"].BLOCK_BLOT;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scope__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../scope */ "./node_modules/parchment/src/scope.ts");
 /* harmony import */ var _shadow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./shadow */ "./node_modules/parchment/src/blot/abstract/shadow.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
 
-class LeafBlot extends _shadow__WEBPACK_IMPORTED_MODULE_1__["default"] {
-    static value(_domNode) {
-        return true;
+var LeafBlot = /** @class */ (function (_super) {
+    __extends(LeafBlot, _super);
+    function LeafBlot() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    index(node, offset) {
+    LeafBlot.value = function (_domNode) {
+        return true;
+    };
+    LeafBlot.prototype.index = function (node, offset) {
         if (this.domNode === node ||
             this.domNode.compareDocumentPosition(node) &
                 Node.DOCUMENT_POSITION_CONTAINED_BY) {
             return Math.min(offset, 1);
         }
         return -1;
-    }
-    position(index, _inclusive) {
-        const childNodes = Array.from(this.parent.domNode.childNodes);
-        let offset = childNodes.indexOf(this.domNode);
+    };
+    LeafBlot.prototype.position = function (index, _inclusive) {
+        var childNodes = Array.from(this.parent.domNode.childNodes);
+        var offset = childNodes.indexOf(this.domNode);
         if (index > 0) {
             offset += 1;
         }
         return [this.parent.domNode, offset];
-    }
-    value() {
-        return {
-            [this.statics.blotName]: this.statics.value(this.domNode) || true,
-        };
-    }
-}
-LeafBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_0__["default"].INLINE_BLOT;
+    };
+    LeafBlot.prototype.value = function () {
+        var _a;
+        return _a = {},
+            _a[this.statics.blotName] = this.statics.value(this.domNode) || true,
+            _a;
+    };
+    LeafBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_0__["default"].INLINE_BLOT;
+    return LeafBlot;
+}(_shadow__WEBPACK_IMPORTED_MODULE_1__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (LeafBlot);
 
 
@@ -34379,26 +33956,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _error__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../error */ "./node_modules/parchment/src/error.ts");
 /* harmony import */ var _scope__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../scope */ "./node_modules/parchment/src/scope.ts");
 /* harmony import */ var _shadow__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shadow */ "./node_modules/parchment/src/blot/abstract/shadow.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
 
 
 
-class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
-    constructor(scroll, domNode) {
-        super(scroll, domNode);
-        this.uiNode = null;
-        this.build();
+var ParentBlot = /** @class */ (function (_super) {
+    __extends(ParentBlot, _super);
+    function ParentBlot(scroll, domNode) {
+        var _this = _super.call(this, scroll, domNode) || this;
+        _this.uiNode = null;
+        _this.build();
+        return _this;
     }
-    appendChild(other) {
+    ParentBlot.prototype.appendChild = function (other) {
         this.insertBefore(other);
-    }
-    attach() {
-        super.attach();
-        this.children.forEach(child => {
+    };
+    ParentBlot.prototype.attach = function () {
+        _super.prototype.attach.call(this);
+        this.children.forEach(function (child) {
             child.attach();
         });
-    }
-    attachUI(node) {
+    };
+    ParentBlot.prototype.attachUI = function (node) {
         if (this.uiNode != null) {
             this.uiNode.remove();
         }
@@ -34408,17 +33997,18 @@ class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
         }
         this.uiNode.setAttribute('contenteditable', 'false');
         this.domNode.insertBefore(this.uiNode, this.domNode.firstChild);
-    }
-    build() {
+    };
+    ParentBlot.prototype.build = function () {
+        var _this = this;
         this.children = new _collection_linked_list__WEBPACK_IMPORTED_MODULE_0__["default"]();
         // Need to be reversed for if DOM nodes already in order
         Array.from(this.domNode.childNodes)
-            .filter((node) => node !== this.uiNode)
+            .filter(function (node) { return node !== _this.uiNode; })
             .reverse()
-            .forEach((node) => {
+            .forEach(function (node) {
             try {
-                const child = makeAttachedBlot(node, this.scroll);
-                this.insertBefore(child, this.children.head || undefined);
+                var child = makeAttachedBlot(node, _this.scroll);
+                _this.insertBefore(child, _this.children.head || undefined);
             }
             catch (err) {
                 if (err instanceof _error__WEBPACK_IMPORTED_MODULE_1__["default"]) {
@@ -34429,17 +34019,18 @@ class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
                 }
             }
         });
-    }
-    deleteAt(index, length) {
+    };
+    ParentBlot.prototype.deleteAt = function (index, length) {
         if (index === 0 && length === this.length()) {
             return this.remove();
         }
-        this.children.forEachAt(index, length, (child, offset, childLength) => {
+        this.children.forEachAt(index, length, function (child, offset, childLength) {
             child.deleteAt(offset, childLength);
         });
-    }
-    descendant(criteria, index = 0) {
-        const [child, offset] = this.children.find(index);
+    };
+    ParentBlot.prototype.descendant = function (criteria, index) {
+        if (index === void 0) { index = 0; }
+        var _a = this.children.find(index), child = _a[0], offset = _a[1];
         if ((criteria.blotName == null && criteria(child)) ||
             (criteria.blotName != null && child instanceof criteria)) {
             return [child, offset];
@@ -34450,11 +34041,13 @@ class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
         else {
             return [null, -1];
         }
-    }
-    descendants(criteria, index = 0, length = Number.MAX_VALUE) {
-        let descendants = [];
-        let lengthLeft = length;
-        this.children.forEachAt(index, length, (child, childIndex, childLength) => {
+    };
+    ParentBlot.prototype.descendants = function (criteria, index, length) {
+        if (index === void 0) { index = 0; }
+        if (length === void 0) { length = Number.MAX_VALUE; }
+        var descendants = [];
+        var lengthLeft = length;
+        this.children.forEachAt(index, length, function (child, childIndex, childLength) {
             if ((criteria.blotName == null && criteria(child)) ||
                 (criteria.blotName != null && child instanceof criteria)) {
                 descendants.push(child);
@@ -34465,29 +34058,30 @@ class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
             lengthLeft -= childLength;
         });
         return descendants;
-    }
-    detach() {
-        this.children.forEach(child => {
+    };
+    ParentBlot.prototype.detach = function () {
+        this.children.forEach(function (child) {
             child.detach();
         });
-        super.detach();
-    }
-    enforceAllowedChildren() {
-        let done = false;
-        this.children.forEach((child) => {
+        _super.prototype.detach.call(this);
+    };
+    ParentBlot.prototype.enforceAllowedChildren = function () {
+        var _this = this;
+        var done = false;
+        this.children.forEach(function (child) {
             if (done) {
                 return;
             }
-            const allowed = this.statics.allowedChildren.some((def) => child instanceof def);
+            var allowed = _this.statics.allowedChildren.some(function (def) { return child instanceof def; });
             if (allowed) {
                 return;
             }
             if (child.statics.scope === _scope__WEBPACK_IMPORTED_MODULE_2__["default"].BLOCK_BLOT) {
                 if (child.next != null) {
-                    this.splitAfter(child);
+                    _this.splitAfter(child);
                 }
                 if (child.prev != null) {
-                    this.splitAfter(child.prev);
+                    _this.splitAfter(child.prev);
                 }
                 child.parent.unwrap();
                 done = true;
@@ -34499,29 +34093,29 @@ class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
                 child.remove();
             }
         });
-    }
-    formatAt(index, length, name, value) {
-        this.children.forEachAt(index, length, (child, offset, childLength) => {
+    };
+    ParentBlot.prototype.formatAt = function (index, length, name, value) {
+        this.children.forEachAt(index, length, function (child, offset, childLength) {
             child.formatAt(offset, childLength, name, value);
         });
-    }
-    insertAt(index, value, def) {
-        const [child, offset] = this.children.find(index);
+    };
+    ParentBlot.prototype.insertAt = function (index, value, def) {
+        var _a = this.children.find(index), child = _a[0], offset = _a[1];
         if (child) {
             child.insertAt(offset, value, def);
         }
         else {
-            const blot = def == null
+            var blot = def == null
                 ? this.scroll.create('text', value)
                 : this.scroll.create(value, def);
             this.appendChild(blot);
         }
-    }
-    insertBefore(childBlot, refBlot) {
+    };
+    ParentBlot.prototype.insertBefore = function (childBlot, refBlot) {
         if (childBlot.parent != null) {
             childBlot.parent.children.remove(childBlot);
         }
-        let refDomNode = null;
+        var refDomNode = null;
         this.children.insertBefore(childBlot, refBlot || null);
         if (refBlot != null) {
             refDomNode = refBlot.domNode;
@@ -34532,26 +34126,26 @@ class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
         }
         childBlot.parent = this;
         childBlot.attach();
-    }
-    length() {
-        return this.children.reduce((memo, child) => {
+    };
+    ParentBlot.prototype.length = function () {
+        return this.children.reduce(function (memo, child) {
             return memo + child.length();
         }, 0);
-    }
-    moveChildren(targetParent, refNode) {
-        this.children.forEach(child => {
+    };
+    ParentBlot.prototype.moveChildren = function (targetParent, refNode) {
+        this.children.forEach(function (child) {
             targetParent.insertBefore(child, refNode);
         });
-    }
-    optimize(context) {
-        super.optimize(context);
+    };
+    ParentBlot.prototype.optimize = function (context) {
+        _super.prototype.optimize.call(this, context);
         this.enforceAllowedChildren();
         if (this.uiNode != null && this.uiNode !== this.domNode.firstChild) {
             this.domNode.insertBefore(this.uiNode, this.domNode.firstChild);
         }
         if (this.children.length === 0) {
             if (this.statics.defaultChild != null) {
-                const child = this.scroll.create(this.statics.defaultChild.blotName);
+                var child = this.scroll.create(this.statics.defaultChild.blotName);
                 this.appendChild(child);
                 // TODO double check if necessary
                 // child.optimize(context);
@@ -34560,10 +34154,11 @@ class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
                 this.remove();
             }
         }
-    }
-    path(index, inclusive = false) {
-        const [child, offset] = this.children.find(index, inclusive);
-        const position = [[this, index]];
+    };
+    ParentBlot.prototype.path = function (index, inclusive) {
+        if (inclusive === void 0) { inclusive = false; }
+        var _a = this.children.find(index, inclusive), child = _a[0], offset = _a[1];
+        var position = [[this, index]];
         if (child instanceof ParentBlot) {
             return position.concat(child.path(offset, inclusive));
         }
@@ -34571,18 +34166,19 @@ class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
             position.push([child, offset]);
         }
         return position;
-    }
-    removeChild(child) {
+    };
+    ParentBlot.prototype.removeChild = function (child) {
         this.children.remove(child);
-    }
-    replaceWith(name, value) {
-        const replacement = typeof name === 'string' ? this.scroll.create(name, value) : name;
+    };
+    ParentBlot.prototype.replaceWith = function (name, value) {
+        var replacement = typeof name === 'string' ? this.scroll.create(name, value) : name;
         if (replacement instanceof ParentBlot) {
             this.moveChildren(replacement);
         }
-        return super.replaceWith(replacement);
-    }
-    split(index, force = false) {
+        return _super.prototype.replaceWith.call(this, replacement);
+    };
+    ParentBlot.prototype.split = function (index, force) {
+        if (force === void 0) { force = false; }
         if (!force) {
             if (index === 0) {
                 return this;
@@ -34591,20 +34187,20 @@ class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
                 return this.next;
             }
         }
-        const after = this.clone();
+        var after = this.clone();
         if (this.parent) {
             this.parent.insertBefore(after, this.next || undefined);
         }
-        this.children.forEachAt(index, this.length(), (child, offset, _length) => {
-            const split = child.split(offset, force);
+        this.children.forEachAt(index, this.length(), function (child, offset, _length) {
+            var split = child.split(offset, force);
             if (split != null) {
                 after.appendChild(split);
             }
         });
         return after;
-    }
-    splitAfter(child) {
-        const after = this.clone();
+    };
+    ParentBlot.prototype.splitAfter = function (child) {
+        var after = this.clone();
         while (child.next != null) {
             after.appendChild(child.next);
         }
@@ -34612,23 +34208,24 @@ class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
             this.parent.insertBefore(after, this.next || undefined);
         }
         return after;
-    }
-    unwrap() {
+    };
+    ParentBlot.prototype.unwrap = function () {
         if (this.parent) {
             this.moveChildren(this.parent, this.next || undefined);
         }
         this.remove();
-    }
-    update(mutations, _context) {
-        const addedNodes = [];
-        const removedNodes = [];
-        mutations.forEach(mutation => {
-            if (mutation.target === this.domNode && mutation.type === 'childList') {
+    };
+    ParentBlot.prototype.update = function (mutations, _context) {
+        var _this = this;
+        var addedNodes = [];
+        var removedNodes = [];
+        mutations.forEach(function (mutation) {
+            if (mutation.target === _this.domNode && mutation.type === 'childList') {
                 addedNodes.push.apply(addedNodes, mutation.addedNodes);
                 removedNodes.push.apply(removedNodes, mutation.removedNodes);
             }
         });
-        removedNodes.forEach((node) => {
+        removedNodes.forEach(function (node) {
             // Check node has actually been removed
             // One exception is Chrome does not immediately remove IFRAMEs
             // from DOM but MutationRecord is correct in its reported removal
@@ -34639,20 +34236,20 @@ class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
                     Node.DOCUMENT_POSITION_CONTAINED_BY) {
                 return;
             }
-            const blot = this.scroll.find(node);
+            var blot = _this.scroll.find(node);
             if (blot == null) {
                 return;
             }
             if (blot.domNode.parentNode == null ||
-                blot.domNode.parentNode === this.domNode) {
+                blot.domNode.parentNode === _this.domNode) {
                 blot.detach();
             }
         });
         addedNodes
-            .filter(node => {
-            return node.parentNode === this.domNode || node === this.uiNode;
+            .filter(function (node) {
+            return node.parentNode === _this.domNode || node === _this.uiNode;
         })
-            .sort((a, b) => {
+            .sort(function (a, b) {
             if (a === b) {
                 return 0;
             }
@@ -34661,32 +34258,33 @@ class ParentBlot extends _shadow__WEBPACK_IMPORTED_MODULE_3__["default"] {
             }
             return -1;
         })
-            .forEach(node => {
-            let refBlot = null;
+            .forEach(function (node) {
+            var refBlot = null;
             if (node.nextSibling != null) {
-                refBlot = this.scroll.find(node.nextSibling);
+                refBlot = _this.scroll.find(node.nextSibling);
             }
-            const blot = makeAttachedBlot(node, this.scroll);
+            var blot = makeAttachedBlot(node, _this.scroll);
             if (blot.next !== refBlot || blot.next == null) {
                 if (blot.parent != null) {
-                    blot.parent.removeChild(this);
+                    blot.parent.removeChild(_this);
                 }
-                this.insertBefore(blot, refBlot || undefined);
+                _this.insertBefore(blot, refBlot || undefined);
             }
         });
         this.enforceAllowedChildren();
-    }
-}
-ParentBlot.uiClass = '';
+    };
+    ParentBlot.uiClass = '';
+    return ParentBlot;
+}(_shadow__WEBPACK_IMPORTED_MODULE_3__["default"]));
 function makeAttachedBlot(node, scroll) {
-    let blot = scroll.find(node);
+    var blot = scroll.find(node);
     if (blot == null) {
         try {
             blot = scroll.create(node);
         }
         catch (e) {
             blot = scroll.create(_scope__WEBPACK_IMPORTED_MODULE_2__["default"].INLINE);
-            Array.from(node.childNodes).forEach((child) => {
+            Array.from(node.childNodes).forEach(function (child) {
                 // @ts-ignore
                 blot.domNode.appendChild(child);
             });
@@ -34718,19 +34316,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class ShadowBlot {
-    constructor(scroll, domNode) {
+var ShadowBlot = /** @class */ (function () {
+    function ShadowBlot(scroll, domNode) {
         this.scroll = scroll;
         this.domNode = domNode;
         _registry__WEBPACK_IMPORTED_MODULE_1__["default"].blots.set(domNode, this);
         this.prev = null;
         this.next = null;
     }
-    static create(value) {
+    ShadowBlot.create = function (value) {
         if (this.tagName == null) {
             throw new _error__WEBPACK_IMPORTED_MODULE_0__["default"]('Blot definition missing tagName');
         }
-        let node;
+        var node;
         if (Array.isArray(this.tagName)) {
             if (typeof value === 'string') {
                 value = value.toUpperCase();
@@ -34755,104 +34353,110 @@ class ShadowBlot {
             node.classList.add(this.className);
         }
         return node;
-    }
-    // Hack for accessing inherited static methods
-    get statics() {
-        return this.constructor;
-    }
-    attach() {
+    };
+    Object.defineProperty(ShadowBlot.prototype, "statics", {
+        // Hack for accessing inherited static methods
+        get: function () {
+            return this.constructor;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ShadowBlot.prototype.attach = function () {
         // Nothing to do
-    }
-    clone() {
-        const domNode = this.domNode.cloneNode(false);
+    };
+    ShadowBlot.prototype.clone = function () {
+        var domNode = this.domNode.cloneNode(false);
         return this.scroll.create(domNode);
-    }
-    detach() {
+    };
+    ShadowBlot.prototype.detach = function () {
         if (this.parent != null) {
             this.parent.removeChild(this);
         }
         _registry__WEBPACK_IMPORTED_MODULE_1__["default"].blots.delete(this.domNode);
-    }
-    deleteAt(index, length) {
-        const blot = this.isolate(index, length);
+    };
+    ShadowBlot.prototype.deleteAt = function (index, length) {
+        var blot = this.isolate(index, length);
         blot.remove();
-    }
-    formatAt(index, length, name, value) {
-        const blot = this.isolate(index, length);
+    };
+    ShadowBlot.prototype.formatAt = function (index, length, name, value) {
+        var blot = this.isolate(index, length);
         if (this.scroll.query(name, _scope__WEBPACK_IMPORTED_MODULE_2__["default"].BLOT) != null && value) {
             blot.wrap(name, value);
         }
         else if (this.scroll.query(name, _scope__WEBPACK_IMPORTED_MODULE_2__["default"].ATTRIBUTE) != null) {
-            const parent = this.scroll.create(this.statics.scope);
+            var parent = this.scroll.create(this.statics.scope);
             blot.wrap(parent);
             parent.format(name, value);
         }
-    }
-    insertAt(index, value, def) {
-        const blot = def == null
+    };
+    ShadowBlot.prototype.insertAt = function (index, value, def) {
+        var blot = def == null
             ? this.scroll.create('text', value)
             : this.scroll.create(value, def);
-        const ref = this.split(index);
+        var ref = this.split(index);
         this.parent.insertBefore(blot, ref || undefined);
-    }
-    isolate(index, length) {
-        const target = this.split(index);
+    };
+    ShadowBlot.prototype.isolate = function (index, length) {
+        var target = this.split(index);
         if (target == null) {
             throw new Error('Attempt to isolate at end');
         }
         target.split(length);
         return target;
-    }
-    length() {
+    };
+    ShadowBlot.prototype.length = function () {
         return 1;
-    }
-    offset(root = this.parent) {
+    };
+    ShadowBlot.prototype.offset = function (root) {
+        if (root === void 0) { root = this.parent; }
         if (this.parent == null || this === root) {
             return 0;
         }
         return this.parent.children.offset(this) + this.parent.offset(root);
-    }
-    optimize(_context) {
+    };
+    ShadowBlot.prototype.optimize = function (_context) {
         if (this.statics.requiredContainer &&
             !(this.parent instanceof this.statics.requiredContainer)) {
             this.wrap(this.statics.requiredContainer.blotName);
         }
-    }
-    remove() {
+    };
+    ShadowBlot.prototype.remove = function () {
         if (this.domNode.parentNode != null) {
             this.domNode.parentNode.removeChild(this.domNode);
         }
         this.detach();
-    }
-    replaceWith(name, value) {
-        const replacement = typeof name === 'string' ? this.scroll.create(name, value) : name;
+    };
+    ShadowBlot.prototype.replaceWith = function (name, value) {
+        var replacement = typeof name === 'string' ? this.scroll.create(name, value) : name;
         if (this.parent != null) {
             this.parent.insertBefore(replacement, this.next || undefined);
             this.remove();
         }
         return replacement;
-    }
-    split(index, _force) {
+    };
+    ShadowBlot.prototype.split = function (index, _force) {
         return index === 0 ? this : this.next;
-    }
-    update(_mutations, _context) {
+    };
+    ShadowBlot.prototype.update = function (_mutations, _context) {
         // Nothing to do by default
-    }
-    wrap(name, value) {
-        const wrapper = typeof name === 'string'
+    };
+    ShadowBlot.prototype.wrap = function (name, value) {
+        var wrapper = typeof name === 'string'
             ? this.scroll.create(name, value)
             : name;
         if (this.parent != null) {
             this.parent.insertBefore(wrapper, this.next || undefined);
         }
         if (typeof wrapper.appendChild !== 'function') {
-            throw new _error__WEBPACK_IMPORTED_MODULE_0__["default"](`Cannot wrap ${name}`);
+            throw new _error__WEBPACK_IMPORTED_MODULE_0__["default"]("Cannot wrap " + name);
         }
         wrapper.appendChild(this);
         return wrapper;
-    }
-}
-ShadowBlot.blotName = 'abstract';
+    };
+    ShadowBlot.blotName = 'abstract';
+    return ShadowBlot;
+}());
 /* harmony default export */ __webpack_exports__["default"] = (ShadowBlot);
 
 
@@ -34873,19 +34477,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _abstract_leaf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./abstract/leaf */ "./node_modules/parchment/src/blot/abstract/leaf.ts");
 /* harmony import */ var _abstract_parent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./abstract/parent */ "./node_modules/parchment/src/blot/abstract/parent.ts");
 /* harmony import */ var _inline__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./inline */ "./node_modules/parchment/src/blot/inline.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
 
 
 
 
 
-class BlockBlot extends _abstract_parent__WEBPACK_IMPORTED_MODULE_4__["default"] {
-    constructor(scroll, domNode) {
-        super(scroll, domNode);
-        this.attributes = new _attributor_store__WEBPACK_IMPORTED_MODULE_1__["default"](this.domNode);
+var BlockBlot = /** @class */ (function (_super) {
+    __extends(BlockBlot, _super);
+    function BlockBlot(scroll, domNode) {
+        var _this = _super.call(this, scroll, domNode) || this;
+        _this.attributes = new _attributor_store__WEBPACK_IMPORTED_MODULE_1__["default"](_this.domNode);
+        return _this;
     }
-    static formats(domNode, scroll) {
-        const match = scroll.query(BlockBlot.blotName);
+    BlockBlot.formats = function (domNode, scroll) {
+        var match = scroll.query(BlockBlot.blotName);
         if (match != null &&
             domNode.tagName === match.tagName) {
             return undefined;
@@ -34896,9 +34512,9 @@ class BlockBlot extends _abstract_parent__WEBPACK_IMPORTED_MODULE_4__["default"]
         else if (Array.isArray(this.tagName)) {
             return domNode.tagName.toLowerCase();
         }
-    }
-    format(name, value) {
-        const format = this.scroll.query(name, _scope__WEBPACK_IMPORTED_MODULE_2__["default"].BLOCK);
+    };
+    BlockBlot.prototype.format = function (name, value) {
+        var format = this.scroll.query(name, _scope__WEBPACK_IMPORTED_MODULE_2__["default"].BLOCK);
         if (format == null) {
             return;
         }
@@ -34912,60 +34528,64 @@ class BlockBlot extends _abstract_parent__WEBPACK_IMPORTED_MODULE_4__["default"]
             (name !== this.statics.blotName || this.formats()[name] !== value)) {
             this.replaceWith(name, value);
         }
-    }
-    formats() {
-        const formats = this.attributes.values();
-        const format = this.statics.formats(this.domNode, this.scroll);
+    };
+    BlockBlot.prototype.formats = function () {
+        var formats = this.attributes.values();
+        var format = this.statics.formats(this.domNode, this.scroll);
         if (format != null) {
             formats[this.statics.blotName] = format;
         }
         return formats;
-    }
-    formatAt(index, length, name, value) {
+    };
+    BlockBlot.prototype.formatAt = function (index, length, name, value) {
         if (this.scroll.query(name, _scope__WEBPACK_IMPORTED_MODULE_2__["default"].BLOCK) != null) {
             this.format(name, value);
         }
         else {
-            super.formatAt(index, length, name, value);
+            _super.prototype.formatAt.call(this, index, length, name, value);
         }
-    }
-    insertAt(index, value, def) {
+    };
+    BlockBlot.prototype.insertAt = function (index, value, def) {
         if (def == null || this.scroll.query(value, _scope__WEBPACK_IMPORTED_MODULE_2__["default"].INLINE) != null) {
             // Insert text or inline
-            super.insertAt(index, value, def);
+            _super.prototype.insertAt.call(this, index, value, def);
         }
         else {
-            const after = this.split(index);
+            var after = this.split(index);
             if (after != null) {
-                const blot = this.scroll.create(value, def);
+                var blot = this.scroll.create(value, def);
                 after.parent.insertBefore(blot, after);
             }
             else {
                 throw new Error('Attempt to insertAt after block boundaries');
             }
         }
-    }
-    replaceWith(name, value) {
-        const replacement = super.replaceWith(name, value);
+    };
+    BlockBlot.prototype.replaceWith = function (name, value) {
+        var replacement = _super.prototype.replaceWith.call(this, name, value);
         this.attributes.copy(replacement);
         return replacement;
-    }
-    update(mutations, context) {
-        super.update(mutations, context);
-        const attributeChanged = mutations.some(mutation => mutation.target === this.domNode && mutation.type === 'attributes');
+    };
+    BlockBlot.prototype.update = function (mutations, context) {
+        var _this = this;
+        _super.prototype.update.call(this, mutations, context);
+        var attributeChanged = mutations.some(function (mutation) {
+            return mutation.target === _this.domNode && mutation.type === 'attributes';
+        });
         if (attributeChanged) {
             this.attributes.build();
         }
-    }
-}
-BlockBlot.blotName = 'block';
-BlockBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_2__["default"].BLOCK_BLOT;
-BlockBlot.tagName = 'P';
-BlockBlot.allowedChildren = [
-    _inline__WEBPACK_IMPORTED_MODULE_5__["default"],
-    BlockBlot,
-    _abstract_leaf__WEBPACK_IMPORTED_MODULE_3__["default"],
-];
+    };
+    BlockBlot.blotName = 'block';
+    BlockBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_2__["default"].BLOCK_BLOT;
+    BlockBlot.tagName = 'P';
+    BlockBlot.allowedChildren = [
+        _inline__WEBPACK_IMPORTED_MODULE_5__["default"],
+        BlockBlot,
+        _abstract_leaf__WEBPACK_IMPORTED_MODULE_3__["default"],
+    ];
+    return BlockBlot;
+}(_abstract_parent__WEBPACK_IMPORTED_MODULE_4__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (BlockBlot);
 
 
@@ -34981,29 +34601,44 @@ BlockBlot.allowedChildren = [
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _abstract_leaf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./abstract/leaf */ "./node_modules/parchment/src/blot/abstract/leaf.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
-class EmbedBlot extends _abstract_leaf__WEBPACK_IMPORTED_MODULE_0__["default"] {
-    static formats(_domNode, _scroll) {
-        return undefined;
+var EmbedBlot = /** @class */ (function (_super) {
+    __extends(EmbedBlot, _super);
+    function EmbedBlot() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    format(name, value) {
+    EmbedBlot.formats = function (_domNode, _scroll) {
+        return undefined;
+    };
+    EmbedBlot.prototype.format = function (name, value) {
         // super.formatAt wraps, which is what we want in general,
         // but this allows subclasses to overwrite for formats
         // that just apply to particular embeds
-        super.formatAt(0, this.length(), name, value);
-    }
-    formatAt(index, length, name, value) {
+        _super.prototype.formatAt.call(this, 0, this.length(), name, value);
+    };
+    EmbedBlot.prototype.formatAt = function (index, length, name, value) {
         if (index === 0 && length === this.length()) {
             this.format(name, value);
         }
         else {
-            super.formatAt(index, length, name, value);
+            _super.prototype.formatAt.call(this, index, length, name, value);
         }
-    }
-    formats() {
+    };
+    EmbedBlot.prototype.formats = function () {
         return this.statics.formats(this.domNode, this.scroll);
-    }
-}
+    };
+    return EmbedBlot;
+}(_abstract_leaf__WEBPACK_IMPORTED_MODULE_0__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (EmbedBlot);
 
 
@@ -35023,6 +34658,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scope__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../scope */ "./node_modules/parchment/src/scope.ts");
 /* harmony import */ var _abstract_leaf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./abstract/leaf */ "./node_modules/parchment/src/blot/abstract/leaf.ts");
 /* harmony import */ var _abstract_parent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./abstract/parent */ "./node_modules/parchment/src/blot/abstract/parent.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
 
 
@@ -35034,7 +34679,7 @@ function isEqual(obj1, obj2) {
         return false;
     }
     // @ts-ignore
-    for (const prop in obj1) {
+    for (var prop in obj1) {
         // @ts-ignore
         if (obj1[prop] !== obj2[prop]) {
             return false;
@@ -35042,13 +34687,15 @@ function isEqual(obj1, obj2) {
     }
     return true;
 }
-class InlineBlot extends _abstract_parent__WEBPACK_IMPORTED_MODULE_4__["default"] {
-    constructor(scroll, domNode) {
-        super(scroll, domNode);
-        this.attributes = new _attributor_store__WEBPACK_IMPORTED_MODULE_1__["default"](this.domNode);
+var InlineBlot = /** @class */ (function (_super) {
+    __extends(InlineBlot, _super);
+    function InlineBlot(scroll, domNode) {
+        var _this = _super.call(this, scroll, domNode) || this;
+        _this.attributes = new _attributor_store__WEBPACK_IMPORTED_MODULE_1__["default"](_this.domNode);
+        return _this;
     }
-    static formats(domNode, scroll) {
-        const match = scroll.query(InlineBlot.blotName);
+    InlineBlot.formats = function (domNode, scroll) {
+        var match = scroll.query(InlineBlot.blotName);
         if (match != null &&
             domNode.tagName === match.tagName) {
             return undefined;
@@ -35060,19 +34707,20 @@ class InlineBlot extends _abstract_parent__WEBPACK_IMPORTED_MODULE_4__["default"
             return domNode.tagName.toLowerCase();
         }
         return undefined;
-    }
-    format(name, value) {
+    };
+    InlineBlot.prototype.format = function (name, value) {
+        var _this = this;
         if (name === this.statics.blotName && !value) {
-            this.children.forEach(child => {
+            this.children.forEach(function (child) {
                 if (!(child instanceof InlineBlot)) {
                     child = child.wrap(InlineBlot.blotName, true);
                 }
-                this.attributes.copy(child);
+                _this.attributes.copy(child);
             });
             this.unwrap();
         }
         else {
-            const format = this.scroll.query(name, _scope__WEBPACK_IMPORTED_MODULE_2__["default"].INLINE);
+            var format = this.scroll.query(name, _scope__WEBPACK_IMPORTED_MODULE_2__["default"].INLINE);
             if (format == null) {
                 return;
             }
@@ -35084,63 +34732,67 @@ class InlineBlot extends _abstract_parent__WEBPACK_IMPORTED_MODULE_4__["default"
                 this.replaceWith(name, value);
             }
         }
-    }
-    formats() {
-        const formats = this.attributes.values();
-        const format = this.statics.formats(this.domNode, this.scroll);
+    };
+    InlineBlot.prototype.formats = function () {
+        var formats = this.attributes.values();
+        var format = this.statics.formats(this.domNode, this.scroll);
         if (format != null) {
             formats[this.statics.blotName] = format;
         }
         return formats;
-    }
-    formatAt(index, length, name, value) {
+    };
+    InlineBlot.prototype.formatAt = function (index, length, name, value) {
         if (this.formats()[name] != null ||
             this.scroll.query(name, _scope__WEBPACK_IMPORTED_MODULE_2__["default"].ATTRIBUTE)) {
-            const blot = this.isolate(index, length);
+            var blot = this.isolate(index, length);
             blot.format(name, value);
         }
         else {
-            super.formatAt(index, length, name, value);
+            _super.prototype.formatAt.call(this, index, length, name, value);
         }
-    }
-    optimize(context) {
-        super.optimize(context);
-        const formats = this.formats();
+    };
+    InlineBlot.prototype.optimize = function (context) {
+        _super.prototype.optimize.call(this, context);
+        var formats = this.formats();
         if (Object.keys(formats).length === 0) {
             return this.unwrap(); // unformatted span
         }
-        const next = this.next;
+        var next = this.next;
         if (next instanceof InlineBlot &&
             next.prev === this &&
             isEqual(formats, next.formats())) {
             next.moveChildren(this);
             next.remove();
         }
-    }
-    replaceWith(name, value) {
-        const replacement = super.replaceWith(name, value);
+    };
+    InlineBlot.prototype.replaceWith = function (name, value) {
+        var replacement = _super.prototype.replaceWith.call(this, name, value);
         this.attributes.copy(replacement);
         return replacement;
-    }
-    update(mutations, context) {
-        super.update(mutations, context);
-        const attributeChanged = mutations.some(mutation => mutation.target === this.domNode && mutation.type === 'attributes');
+    };
+    InlineBlot.prototype.update = function (mutations, context) {
+        var _this = this;
+        _super.prototype.update.call(this, mutations, context);
+        var attributeChanged = mutations.some(function (mutation) {
+            return mutation.target === _this.domNode && mutation.type === 'attributes';
+        });
         if (attributeChanged) {
             this.attributes.build();
         }
-    }
-    wrap(name, value) {
-        const wrapper = super.wrap(name, value);
+    };
+    InlineBlot.prototype.wrap = function (name, value) {
+        var wrapper = _super.prototype.wrap.call(this, name, value);
         if (wrapper instanceof InlineBlot) {
             this.attributes.move(wrapper);
         }
         return wrapper;
-    }
-}
-InlineBlot.allowedChildren = [InlineBlot, _abstract_leaf__WEBPACK_IMPORTED_MODULE_3__["default"]];
-InlineBlot.blotName = 'inline';
-InlineBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_2__["default"].INLINE_BLOT;
-InlineBlot.tagName = 'SPAN';
+    };
+    InlineBlot.allowedChildren = [InlineBlot, _abstract_leaf__WEBPACK_IMPORTED_MODULE_3__["default"]];
+    InlineBlot.blotName = 'inline';
+    InlineBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_2__["default"].INLINE_BLOT;
+    InlineBlot.tagName = 'SPAN';
+    return InlineBlot;
+}(_abstract_parent__WEBPACK_IMPORTED_MODULE_4__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (InlineBlot);
 
 
@@ -35160,85 +34812,109 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _abstract_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./abstract/container */ "./node_modules/parchment/src/blot/abstract/container.ts");
 /* harmony import */ var _abstract_parent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./abstract/parent */ "./node_modules/parchment/src/blot/abstract/parent.ts");
 /* harmony import */ var _block__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block */ "./node_modules/parchment/src/blot/block.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
 
 
 
 
-const OBSERVER_CONFIG = {
+var OBSERVER_CONFIG = {
     attributes: true,
     characterData: true,
     characterDataOldValue: true,
     childList: true,
     subtree: true,
 };
-const MAX_OPTIMIZE_ITERATIONS = 100;
-class ScrollBlot extends _abstract_parent__WEBPACK_IMPORTED_MODULE_3__["default"] {
-    constructor(registry, node) {
+var MAX_OPTIMIZE_ITERATIONS = 100;
+var ScrollBlot = /** @class */ (function (_super) {
+    __extends(ScrollBlot, _super);
+    function ScrollBlot(registry, node) {
+        var _this = 
         // @ts-ignore
-        super(null, node);
-        this.registry = registry;
-        this.scroll = this;
-        this.build();
-        this.observer = new MutationObserver((mutations) => {
-            this.update(mutations);
+        _super.call(this, null, node) || this;
+        _this.registry = registry;
+        _this.scroll = _this;
+        _this.build();
+        _this.observer = new MutationObserver(function (mutations) {
+            _this.update(mutations);
         });
-        this.observer.observe(this.domNode, OBSERVER_CONFIG);
-        this.attach();
+        _this.observer.observe(_this.domNode, OBSERVER_CONFIG);
+        _this.attach();
+        return _this;
     }
-    create(input, value) {
+    ScrollBlot.prototype.create = function (input, value) {
         return this.registry.create(this, input, value);
-    }
-    find(node, bubble = false) {
+    };
+    ScrollBlot.prototype.find = function (node, bubble) {
+        if (bubble === void 0) { bubble = false; }
         return this.registry.find(node, bubble);
-    }
-    query(query, scope = _scope__WEBPACK_IMPORTED_MODULE_1__["default"].ANY) {
+    };
+    ScrollBlot.prototype.query = function (query, scope) {
+        if (scope === void 0) { scope = _scope__WEBPACK_IMPORTED_MODULE_1__["default"].ANY; }
         return this.registry.query(query, scope);
-    }
-    register(...definitions) {
-        return this.registry.register(...definitions);
-    }
-    build() {
+    };
+    ScrollBlot.prototype.register = function () {
+        var definitions = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            definitions[_i] = arguments[_i];
+        }
+        var _a;
+        return (_a = this.registry).register.apply(_a, definitions);
+    };
+    ScrollBlot.prototype.build = function () {
         if (this.scroll == null) {
             return;
         }
-        super.build();
-    }
-    detach() {
-        super.detach();
+        _super.prototype.build.call(this);
+    };
+    ScrollBlot.prototype.detach = function () {
+        _super.prototype.detach.call(this);
         this.observer.disconnect();
-    }
-    deleteAt(index, length) {
+    };
+    ScrollBlot.prototype.deleteAt = function (index, length) {
         this.update();
         if (index === 0 && length === this.length()) {
-            this.children.forEach(child => {
+            this.children.forEach(function (child) {
                 child.remove();
             });
         }
         else {
-            super.deleteAt(index, length);
+            _super.prototype.deleteAt.call(this, index, length);
         }
-    }
-    formatAt(index, length, name, value) {
+    };
+    ScrollBlot.prototype.formatAt = function (index, length, name, value) {
         this.update();
-        super.formatAt(index, length, name, value);
-    }
-    insertAt(index, value, def) {
+        _super.prototype.formatAt.call(this, index, length, name, value);
+    };
+    ScrollBlot.prototype.insertAt = function (index, value, def) {
         this.update();
-        super.insertAt(index, value, def);
-    }
-    optimize(mutations = [], context = {}) {
-        super.optimize(context);
-        const mutationsMap = context.mutationsMap || new WeakMap();
+        _super.prototype.insertAt.call(this, index, value, def);
+    };
+    ScrollBlot.prototype.optimize = function (mutations, context) {
+        var _this = this;
+        if (mutations === void 0) { mutations = []; }
+        if (context === void 0) { context = {}; }
+        _super.prototype.optimize.call(this, context);
+        var mutationsMap = context.mutationsMap || new WeakMap();
         // We must modify mutations directly, cannot make copy and then modify
-        let records = Array.from(this.observer.takeRecords());
+        var records = Array.from(this.observer.takeRecords());
         // Array.push currently seems to be implemented by a non-tail recursive function
         // so we cannot just mutations.push.apply(mutations, this.observer.takeRecords());
         while (records.length > 0) {
             mutations.push(records.pop());
         }
-        const mark = (blot, markParent = true) => {
-            if (blot == null || blot === this) {
+        var mark = function (blot, markParent) {
+            if (markParent === void 0) { markParent = true; }
+            if (blot == null || blot === _this) {
                 return;
             }
             if (blot.domNode.parentNode == null) {
@@ -35251,7 +34927,7 @@ class ScrollBlot extends _abstract_parent__WEBPACK_IMPORTED_MODULE_3__["default"
                 mark(blot.parent);
             }
         };
-        const optimize = (blot) => {
+        var optimize = function (blot) {
             // Post-order traversal
             if (!mutationsMap.has(blot.domNode)) {
                 return;
@@ -35262,24 +34938,24 @@ class ScrollBlot extends _abstract_parent__WEBPACK_IMPORTED_MODULE_3__["default"
             mutationsMap.delete(blot.domNode);
             blot.optimize(context);
         };
-        let remaining = mutations;
-        for (let i = 0; remaining.length > 0; i += 1) {
+        var remaining = mutations;
+        for (var i = 0; remaining.length > 0; i += 1) {
             if (i >= MAX_OPTIMIZE_ITERATIONS) {
                 throw new Error('[Parchment] Maximum optimize iterations reached');
             }
-            remaining.forEach((mutation) => {
-                const blot = this.find(mutation.target, true);
+            remaining.forEach(function (mutation) {
+                var blot = _this.find(mutation.target, true);
                 if (blot == null) {
                     return;
                 }
                 if (blot.domNode === mutation.target) {
                     if (mutation.type === 'childList') {
-                        mark(this.find(mutation.previousSibling, false));
-                        Array.from(mutation.addedNodes).forEach((node) => {
-                            const child = this.find(node, false);
+                        mark(_this.find(mutation.previousSibling, false));
+                        Array.from(mutation.addedNodes).forEach(function (node) {
+                            var child = _this.find(node, false);
                             mark(child, false);
                             if (child instanceof _abstract_parent__WEBPACK_IMPORTED_MODULE_3__["default"]) {
-                                child.children.forEach((grandChild) => {
+                                child.children.forEach(function (grandChild) {
                                     mark(grandChild, false);
                                 });
                             }
@@ -35298,13 +34974,15 @@ class ScrollBlot extends _abstract_parent__WEBPACK_IMPORTED_MODULE_3__["default"
                 mutations.push(records.pop());
             }
         }
-    }
-    update(mutations, context = {}) {
+    };
+    ScrollBlot.prototype.update = function (mutations, context) {
+        var _this = this;
+        if (context === void 0) { context = {}; }
         mutations = mutations || this.observer.takeRecords();
-        const mutationsMap = new WeakMap();
+        var mutationsMap = new WeakMap();
         mutations
-            .map((mutation) => {
-            const blot = _registry__WEBPACK_IMPORTED_MODULE_0__["default"].find(mutation.target, true);
+            .map(function (mutation) {
+            var blot = _registry__WEBPACK_IMPORTED_MODULE_0__["default"].find(mutation.target, true);
             if (blot == null) {
                 return null;
             }
@@ -35317,23 +34995,24 @@ class ScrollBlot extends _abstract_parent__WEBPACK_IMPORTED_MODULE_3__["default"
                 return blot;
             }
         })
-            .forEach((blot) => {
-            if (blot != null && blot !== this && mutationsMap.has(blot.domNode)) {
+            .forEach(function (blot) {
+            if (blot != null && blot !== _this && mutationsMap.has(blot.domNode)) {
                 blot.update(mutationsMap.get(blot.domNode) || [], context);
             }
         });
         context.mutationsMap = mutationsMap;
         if (mutationsMap.has(this.domNode)) {
-            super.update(mutationsMap.get(this.domNode), context);
+            _super.prototype.update.call(this, mutationsMap.get(this.domNode), context);
         }
         this.optimize(mutations, context);
-    }
-}
-ScrollBlot.blotName = 'scroll';
-ScrollBlot.defaultChild = _block__WEBPACK_IMPORTED_MODULE_4__["default"];
-ScrollBlot.allowedChildren = [_block__WEBPACK_IMPORTED_MODULE_4__["default"], _abstract_container__WEBPACK_IMPORTED_MODULE_2__["default"]];
-ScrollBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_1__["default"].BLOCK_BLOT;
-ScrollBlot.tagName = 'DIV';
+    };
+    ScrollBlot.blotName = 'scroll';
+    ScrollBlot.defaultChild = _block__WEBPACK_IMPORTED_MODULE_4__["default"];
+    ScrollBlot.allowedChildren = [_block__WEBPACK_IMPORTED_MODULE_4__["default"], _abstract_container__WEBPACK_IMPORTED_MODULE_2__["default"]];
+    ScrollBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_1__["default"].BLOCK_BLOT;
+    ScrollBlot.tagName = 'DIV';
+    return ScrollBlot;
+}(_abstract_parent__WEBPACK_IMPORTED_MODULE_3__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (ScrollBlot);
 
 
@@ -35350,43 +35029,55 @@ ScrollBlot.tagName = 'DIV';
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scope__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scope */ "./node_modules/parchment/src/scope.ts");
 /* harmony import */ var _abstract_leaf__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./abstract/leaf */ "./node_modules/parchment/src/blot/abstract/leaf.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
 
-class TextBlot extends _abstract_leaf__WEBPACK_IMPORTED_MODULE_1__["default"] {
-    constructor(scroll, node) {
-        super(scroll, node);
-        this.text = this.statics.value(this.domNode);
+var TextBlot = /** @class */ (function (_super) {
+    __extends(TextBlot, _super);
+    function TextBlot(scroll, node) {
+        var _this = _super.call(this, scroll, node) || this;
+        _this.text = _this.statics.value(_this.domNode);
+        return _this;
     }
-    static create(value) {
+    TextBlot.create = function (value) {
         return document.createTextNode(value);
-    }
-    static value(domNode) {
+    };
+    TextBlot.value = function (domNode) {
         return domNode.data;
-    }
-    deleteAt(index, length) {
+    };
+    TextBlot.prototype.deleteAt = function (index, length) {
         this.domNode.data = this.text =
             this.text.slice(0, index) + this.text.slice(index + length);
-    }
-    index(node, offset) {
+    };
+    TextBlot.prototype.index = function (node, offset) {
         if (this.domNode === node) {
             return offset;
         }
         return -1;
-    }
-    insertAt(index, value, def) {
+    };
+    TextBlot.prototype.insertAt = function (index, value, def) {
         if (def == null) {
             this.text = this.text.slice(0, index) + value + this.text.slice(index);
             this.domNode.data = this.text;
         }
         else {
-            super.insertAt(index, value, def);
+            _super.prototype.insertAt.call(this, index, value, def);
         }
-    }
-    length() {
+    };
+    TextBlot.prototype.length = function () {
         return this.text.length;
-    }
-    optimize(context) {
-        super.optimize(context);
+    };
+    TextBlot.prototype.optimize = function (context) {
+        _super.prototype.optimize.call(this, context);
         this.text = this.statics.value(this.domNode);
         if (this.text.length === 0) {
             this.remove();
@@ -35395,11 +35086,13 @@ class TextBlot extends _abstract_leaf__WEBPACK_IMPORTED_MODULE_1__["default"] {
             this.insertAt(this.length(), this.next.value());
             this.next.remove();
         }
-    }
-    position(index, _inclusive = false) {
+    };
+    TextBlot.prototype.position = function (index, _inclusive) {
+        if (_inclusive === void 0) { _inclusive = false; }
         return [this.domNode, index];
-    }
-    split(index, force = false) {
+    };
+    TextBlot.prototype.split = function (index, force) {
+        if (force === void 0) { force = false; }
         if (!force) {
             if (index === 0) {
                 return this;
@@ -35408,24 +35101,26 @@ class TextBlot extends _abstract_leaf__WEBPACK_IMPORTED_MODULE_1__["default"] {
                 return this.next;
             }
         }
-        const after = this.scroll.create(this.domNode.splitText(index));
+        var after = this.scroll.create(this.domNode.splitText(index));
         this.parent.insertBefore(after, this.next || undefined);
         this.text = this.statics.value(this.domNode);
         return after;
-    }
-    update(mutations, _context) {
-        if (mutations.some(mutation => {
-            return (mutation.type === 'characterData' && mutation.target === this.domNode);
+    };
+    TextBlot.prototype.update = function (mutations, _context) {
+        var _this = this;
+        if (mutations.some(function (mutation) {
+            return (mutation.type === 'characterData' && mutation.target === _this.domNode);
         })) {
             this.text = this.statics.value(this.domNode);
         }
-    }
-    value() {
+    };
+    TextBlot.prototype.value = function () {
         return this.text;
-    }
-}
-TextBlot.blotName = 'text';
-TextBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_0__["default"].INLINE_BLOT;
+    };
+    TextBlot.blotName = 'text';
+    TextBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_0__["default"].INLINE_BLOT;
+    return TextBlot;
+}(_abstract_leaf__WEBPACK_IMPORTED_MODULE_1__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (TextBlot);
 
 
@@ -35440,30 +35135,34 @@ TextBlot.scope = _scope__WEBPACK_IMPORTED_MODULE_0__["default"].INLINE_BLOT;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-class LinkedList {
-    constructor() {
+var LinkedList = /** @class */ (function () {
+    function LinkedList() {
         this.head = null;
         this.tail = null;
         this.length = 0;
     }
-    append(...nodes) {
+    LinkedList.prototype.append = function () {
+        var nodes = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            nodes[_i] = arguments[_i];
+        }
         this.insertBefore(nodes[0], null);
         if (nodes.length > 1) {
             this.append.apply(this, nodes.slice(1));
         }
-    }
-    at(index) {
-        const next = this.iterator();
-        let cur = next();
+    };
+    LinkedList.prototype.at = function (index) {
+        var next = this.iterator();
+        var cur = next();
         while (cur && index > 0) {
             index -= 1;
             cur = next();
         }
         return cur;
-    }
-    contains(node) {
-        const next = this.iterator();
-        let cur = next();
+    };
+    LinkedList.prototype.contains = function (node) {
+        var next = this.iterator();
+        var cur = next();
         while (cur) {
             if (cur === node) {
                 return true;
@@ -35471,11 +35170,11 @@ class LinkedList {
             cur = next();
         }
         return false;
-    }
-    indexOf(node) {
-        const next = this.iterator();
-        let cur = next();
-        let index = 0;
+    };
+    LinkedList.prototype.indexOf = function (node) {
+        var next = this.iterator();
+        var cur = next();
+        var index = 0;
         while (cur) {
             if (cur === node) {
                 return index;
@@ -35484,8 +35183,8 @@ class LinkedList {
             cur = next();
         }
         return -1;
-    }
-    insertBefore(node, refNode) {
+    };
+    LinkedList.prototype.insertBefore = function (node, refNode) {
         if (node == null) {
             return;
         }
@@ -35511,10 +35210,10 @@ class LinkedList {
             this.head = this.tail = node;
         }
         this.length += 1;
-    }
-    offset(target) {
-        let index = 0;
-        let cur = this.head;
+    };
+    LinkedList.prototype.offset = function (target) {
+        var index = 0;
+        var cur = this.head;
         while (cur != null) {
             if (cur === target) {
                 return index;
@@ -35523,8 +35222,8 @@ class LinkedList {
             cur = cur.next;
         }
         return -1;
-    }
-    remove(node) {
+    };
+    LinkedList.prototype.remove = function (node) {
         if (!this.contains(node)) {
             return;
         }
@@ -35541,22 +35240,24 @@ class LinkedList {
             this.tail = node.prev;
         }
         this.length -= 1;
-    }
-    iterator(curNode = this.head) {
+    };
+    LinkedList.prototype.iterator = function (curNode) {
+        if (curNode === void 0) { curNode = this.head; }
         // TODO use yield when we can
-        return () => {
-            const ret = curNode;
+        return function () {
+            var ret = curNode;
             if (curNode != null) {
                 curNode = curNode.next;
             }
             return ret;
         };
-    }
-    find(index, inclusive = false) {
-        const next = this.iterator();
-        let cur = next();
+    };
+    LinkedList.prototype.find = function (index, inclusive) {
+        if (inclusive === void 0) { inclusive = false; }
+        var next = this.iterator();
+        var cur = next();
         while (cur) {
-            const length = cur.length();
+            var length = cur.length();
             if (index < length ||
                 (inclusive &&
                     index === length &&
@@ -35567,25 +35268,25 @@ class LinkedList {
             cur = next();
         }
         return [null, 0];
-    }
-    forEach(callback) {
-        const next = this.iterator();
-        let cur = next();
+    };
+    LinkedList.prototype.forEach = function (callback) {
+        var next = this.iterator();
+        var cur = next();
         while (cur) {
             callback(cur);
             cur = next();
         }
-    }
-    forEachAt(index, length, callback) {
+    };
+    LinkedList.prototype.forEachAt = function (index, length, callback) {
         if (length <= 0) {
             return;
         }
-        const [startNode, offset] = this.find(index);
-        let curIndex = index - offset;
-        const next = this.iterator(startNode);
-        let cur = next();
+        var _a = this.find(index), startNode = _a[0], offset = _a[1];
+        var curIndex = index - offset;
+        var next = this.iterator(startNode);
+        var cur = next();
         while (cur && curIndex < index + length) {
-            const curLength = cur.length();
+            var curLength = cur.length();
             if (index > curIndex) {
                 callback(cur, index - curIndex, Math.min(length, curIndex + curLength - index));
             }
@@ -35595,23 +35296,24 @@ class LinkedList {
             curIndex += curLength;
             cur = next();
         }
-    }
-    map(callback) {
-        return this.reduce((memo, cur) => {
+    };
+    LinkedList.prototype.map = function (callback) {
+        return this.reduce(function (memo, cur) {
             memo.push(callback(cur));
             return memo;
         }, []);
-    }
-    reduce(callback, memo) {
-        const next = this.iterator();
-        let cur = next();
+    };
+    LinkedList.prototype.reduce = function (callback, memo) {
+        var next = this.iterator();
+        var cur = next();
         while (cur) {
             memo = callback(memo, cur);
             cur = next();
         }
         return memo;
-    }
-}
+    };
+    return LinkedList;
+}());
 /* harmony default export */ __webpack_exports__["default"] = (LinkedList);
 
 
@@ -35626,15 +35328,29 @@ class LinkedList {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ParchmentError; });
-class ParchmentError extends Error {
-    constructor(message) {
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var ParchmentError = /** @class */ (function (_super) {
+    __extends(ParchmentError, _super);
+    function ParchmentError(message) {
+        var _this = this;
         message = '[Parchment] ' + message;
-        super(message);
-        this.message = message;
-        this.name = this.constructor.name;
+        _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = _this.constructor.name;
+        return _this;
     }
-}
+    return ParchmentError;
+}(Error));
+/* harmony default export */ __webpack_exports__["default"] = (ParchmentError);
 
 
 /***/ }),
@@ -35718,19 +35434,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Registry; });
 /* harmony import */ var _error__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./error */ "./node_modules/parchment/src/error.ts");
 /* harmony import */ var _scope__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./scope */ "./node_modules/parchment/src/scope.ts");
 
 
-class Registry {
-    constructor() {
+var Registry = /** @class */ (function () {
+    function Registry() {
         this.attributes = {};
         this.classes = {};
         this.tags = {};
         this.types = {};
     }
-    static find(node, bubble = false) {
+    Registry.find = function (node, bubble) {
+        if (bubble === void 0) { bubble = false; }
         if (node == null) {
             return null;
         }
@@ -35741,27 +35457,30 @@ class Registry {
             return this.find(node.parentNode, bubble);
         }
         return null;
-    }
-    create(scroll, input, value) {
-        const match = this.query(input);
+    };
+    Registry.prototype.create = function (scroll, input, value) {
+        var match = this.query(input);
         if (match == null) {
-            throw new _error__WEBPACK_IMPORTED_MODULE_0__["default"](`Unable to create ${input} blot`);
+            throw new _error__WEBPACK_IMPORTED_MODULE_0__["default"]("Unable to create " + input + " blot");
         }
-        const blotClass = match;
-        const node = 
+        var blotClass = match;
+        var node = 
         // @ts-ignore
         input instanceof Node || input.nodeType === Node.TEXT_NODE
             ? input
             : blotClass.create(value);
-        const blot = new blotClass(scroll, node, value);
+        var blot = new blotClass(scroll, node, value);
         Registry.blots.set(blot.domNode, blot);
         return blot;
-    }
-    find(node, bubble = false) {
+    };
+    Registry.prototype.find = function (node, bubble) {
+        if (bubble === void 0) { bubble = false; }
         return Registry.find(node, bubble);
-    }
-    query(query, scope = _scope__WEBPACK_IMPORTED_MODULE_1__["default"].ANY) {
-        let match;
+    };
+    Registry.prototype.query = function (query, scope) {
+        var _this = this;
+        if (scope === void 0) { scope = _scope__WEBPACK_IMPORTED_MODULE_1__["default"].ANY; }
+        var match;
         if (typeof query === 'string') {
             match = this.types[query] || this.attributes[query];
             // @ts-ignore
@@ -35778,9 +35497,9 @@ class Registry {
             }
         }
         else if (query instanceof HTMLElement) {
-            const names = (query.getAttribute('class') || '').split(/\s+/);
-            names.some(name => {
-                match = this.classes[name];
+            var names = (query.getAttribute('class') || '').split(/\s+/);
+            names.some(function (name) {
+                match = _this.classes[name];
                 if (match) {
                     return true;
                 }
@@ -35796,14 +35515,19 @@ class Registry {
             return match;
         }
         return null;
-    }
-    register(...definitions) {
+    };
+    Registry.prototype.register = function () {
+        var _this = this;
+        var definitions = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            definitions[_i] = arguments[_i];
+        }
         if (definitions.length > 1) {
-            return definitions.map(d => {
-                return this.register(d);
+            return definitions.map(function (d) {
+                return _this.register(d);
             });
         }
-        const definition = definitions[0];
+        var definition = definitions[0];
         if (typeof definition.blotName !== 'string' &&
             typeof definition.attrName !== 'string') {
             throw new _error__WEBPACK_IMPORTED_MODULE_0__["default"]('Invalid definition');
@@ -35821,27 +35545,29 @@ class Registry {
             }
             if (definition.tagName != null) {
                 if (Array.isArray(definition.tagName)) {
-                    definition.tagName = definition.tagName.map((tagName) => {
+                    definition.tagName = definition.tagName.map(function (tagName) {
                         return tagName.toUpperCase();
                     });
                 }
                 else {
                     definition.tagName = definition.tagName.toUpperCase();
                 }
-                const tagNames = Array.isArray(definition.tagName)
+                var tagNames = Array.isArray(definition.tagName)
                     ? definition.tagName
                     : [definition.tagName];
-                tagNames.forEach((tag) => {
-                    if (this.tags[tag] == null || definition.className == null) {
-                        this.tags[tag] = definition;
+                tagNames.forEach(function (tag) {
+                    if (_this.tags[tag] == null || definition.className == null) {
+                        _this.tags[tag] = definition;
                     }
                 });
             }
         }
         return definition;
-    }
-}
-Registry.blots = new WeakMap();
+    };
+    Registry.blots = new WeakMap();
+    return Registry;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (Registry);
 
 
 /***/ }),
@@ -36837,9 +36563,7 @@ module.exports = g;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _core = __webpack_require__(/*! ./core */ "./core.js");
 
@@ -37028,8 +36752,6 @@ exports.default = _core2.default;
 "use strict";
 
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _deepEqual = __webpack_require__(/*! deep-equal */ "./node_modules/deep-equal/index.js");
 
 var _deepEqual2 = _interopRequireDefault(_deepEqual);
@@ -37088,19 +36810,14 @@ function compareApproximately(actual, expected, tolerance) {
 }
 
 function compareHTML(actual, expected, ignoreClassId) {
-  var _map = [actual, expected].map(function (html) {
+  const [div1, div2] = [actual, expected].map(function (html) {
     if (html instanceof HTMLElement) {
       html = html.innerHTML;
     }
     const container = document.createElement('div');
     container.innerHTML = html.replace(/\n\s*/g, '');
     return container;
-  }),
-      _map2 = _slicedToArray(_map, 2);
-
-  const div1 = _map2[0],
-        div2 = _map2[1];
-
+  });
   let ignoredAttributes = ['width', 'height', 'data-row', 'contenteditable'];
   if (ignoreClassId) {
     ignoredAttributes = ignoredAttributes.concat(['class', 'id']);
@@ -37122,20 +36839,14 @@ function compareNodes(node1, node2, ignoredAttributes = []) {
     if (node1.tagName !== node2.tagName) {
       return `Expected tagName '${node1.tagName}' to equal '${node2.tagName}'`;
     }
-
-    var _map3 = [node1, node2].map(function (node) {
+    const [attr1, attr2] = [node1, node2].map(function (node) {
       return Array.from(node.attributes || []).reduce(function (attr, elem) {
         if (ignoredAttributes.indexOf(elem.name) < 0) {
           attr[elem.name] = elem.name === 'style' ? elem.value.trim() : elem.value;
         }
         return attr;
       }, {});
-    }),
-        _map4 = _slicedToArray(_map3, 2);
-
-    const attr1 = _map4[0],
-          attr2 = _map4[1];
-
+    });
     if (!(0, _deepEqual2.default)(attr1, attr2)) {
       return `Expected attributes ${jasmine.pp(attr1)} to equal ${jasmine.pp(attr2)}`;
     }
@@ -37187,9 +36898,7 @@ function initialize(klass, html, container = this.container, options = {}) {
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _quill = __webpack_require__(/*! ../quill.js */ "./quill.js");
 
@@ -37549,8 +37258,6 @@ describe('Inline', function () {
 "use strict";
 
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _emitter = __webpack_require__(/*! ../../../core/emitter */ "./core/emitter.js");
 
 var _emitter2 = _interopRequireDefault(_emitter);
@@ -37596,39 +37303,21 @@ describe('Scroll', function () {
   describe('leaf()', function () {
     it('text', function () {
       const scroll = this.initialize(_scroll2.default, '<p>Tests</p>');
-
-      var _scroll$leaf = scroll.leaf(2),
-          _scroll$leaf2 = _slicedToArray(_scroll$leaf, 2);
-
-      const leaf = _scroll$leaf2[0],
-            offset = _scroll$leaf2[1];
-
+      const [leaf, offset] = scroll.leaf(2);
       expect(leaf.value()).toEqual('Tests');
       expect(offset).toEqual(2);
     });
 
     it('precise', function () {
       const scroll = this.initialize(_scroll2.default, '<p><u>0</u><s>1</s><u>2</u><s>3</s><u>4</u></p>');
-
-      var _scroll$leaf3 = scroll.leaf(3),
-          _scroll$leaf4 = _slicedToArray(_scroll$leaf3, 2);
-
-      const leaf = _scroll$leaf4[0],
-            offset = _scroll$leaf4[1];
-
+      const [leaf, offset] = scroll.leaf(3);
       expect(leaf.value()).toEqual('2');
       expect(offset).toEqual(1);
     });
 
     it('newline', function () {
       const scroll = this.initialize(_scroll2.default, '<p>0123</p><p>5678</p>');
-
-      var _scroll$leaf5 = scroll.leaf(4),
-          _scroll$leaf6 = _slicedToArray(_scroll$leaf5, 2);
-
-      const leaf = _scroll$leaf6[0],
-            offset = _scroll$leaf6[1];
-
+      const [leaf, offset] = scroll.leaf(4);
       expect(leaf.value()).toEqual('0123');
       expect(offset).toEqual(4);
     });
@@ -37637,26 +37326,14 @@ describe('Scroll', function () {
       const selection = this.initialize(_selection2.default, '<p><u>0</u>1<u>2</u></p>');
       selection.setRange(new _selection.Range(2));
       selection.format('strike', true);
-
-      var _selection$scroll$lea = selection.scroll.leaf(2),
-          _selection$scroll$lea2 = _slicedToArray(_selection$scroll$lea, 2);
-
-      const leaf = _selection$scroll$lea2[0],
-            offset = _selection$scroll$lea2[1];
-
+      const [leaf, offset] = selection.scroll.leaf(2);
       expect(leaf instanceof _cursor2.default).toBe(true);
       expect(offset).toEqual(0);
     });
 
     it('beyond document', function () {
       const scroll = this.initialize(_scroll2.default, '<p>Test</p>');
-
-      var _scroll$leaf7 = scroll.leaf(10),
-          _scroll$leaf8 = _slicedToArray(_scroll$leaf7, 2);
-
-      const leaf = _scroll$leaf8[0],
-            offset = _scroll$leaf8[1];
-
+      const [leaf, offset] = scroll.leaf(10);
       expect(leaf).toEqual(null);
       expect(offset).toEqual(-1);
     });
@@ -37674,8 +37351,6 @@ describe('Scroll', function () {
 
 "use strict";
 
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _quillDelta = __webpack_require__(/*! quill-delta */ "./node_modules/quill-delta/lib/delta.js");
 
@@ -38030,12 +37705,7 @@ describe('Editor', function () {
     });
 
     it('cursor with preformat', function () {
-      var _initialize = this.initialize([_editor2.default, _selection2.default], '<h1><strong><em>0123</em></strong></h1>'),
-          _initialize2 = _slicedToArray(_initialize, 2);
-
-      const editor = _initialize2[0],
-            selection = _initialize2[1];
-
+      const [editor, selection] = this.initialize([_editor2.default, _selection2.default], '<h1><strong><em>0123</em></strong></h1>');
       selection.setRange(new _selection.Range(2));
       selection.format('underline', true);
       selection.format('color', 'red');
@@ -38163,8 +37833,6 @@ describe('Editor', function () {
 
 "use strict";
 
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _quillDelta = __webpack_require__(/*! quill-delta */ "./node_modules/quill-delta/lib/delta.js");
 
@@ -38362,11 +38030,7 @@ describe('Quill', function () {
       setTimeout(() => {
         const calls = this.quill.emitter.emit.calls.all();
         calls.pop();
-
-        var _calls$pop = calls.pop();
-
-        const args = _calls$pop.args;
-
+        const { args } = calls.pop();
         expect(args).toEqual([_emitter2.default.events.TEXT_CHANGE, delta, old, _emitter2.default.sources.USER]);
         done();
       }, 1);
@@ -38638,7 +38302,7 @@ describe('Quill', function () {
     });
 
     it('toolbar custom handler, default container', function () {
-      const handler = function handler() {}; // eslint-disable-line func-style
+      const handler = function () {}; // eslint-disable-line func-style
       const config = (0, _quill.expandConfig)('#test-container', {
         modules: {
           toolbar: {
@@ -38656,14 +38320,7 @@ describe('Quill', function () {
 
   describe('overload', function () {
     it('(index:number, length:number)', function () {
-      var _overload = (0, _quill.overload)(0, 1),
-          _overload2 = _slicedToArray(_overload, 4);
-
-      const index = _overload2[0],
-            length = _overload2[1],
-            formats = _overload2[2],
-            source = _overload2[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(0, 1);
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({});
@@ -38671,14 +38328,7 @@ describe('Quill', function () {
     });
 
     it('(index:number, length:number, format:string, value:boolean, source:string)', function () {
-      var _overload3 = (0, _quill.overload)(0, 1, 'bold', true, _quill2.default.sources.USER),
-          _overload4 = _slicedToArray(_overload3, 4);
-
-      const index = _overload4[0],
-            length = _overload4[1],
-            formats = _overload4[2],
-            source = _overload4[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(0, 1, 'bold', true, _quill2.default.sources.USER);
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({ bold: true });
@@ -38686,14 +38336,7 @@ describe('Quill', function () {
     });
 
     it('(index:number, length:number, format:string, value:string, source:string)', function () {
-      var _overload5 = (0, _quill.overload)(0, 1, 'color', _quill2.default.sources.USER, _quill2.default.sources.USER),
-          _overload6 = _slicedToArray(_overload5, 4);
-
-      const index = _overload6[0],
-            length = _overload6[1],
-            formats = _overload6[2],
-            source = _overload6[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(0, 1, 'color', _quill2.default.sources.USER, _quill2.default.sources.USER);
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({ color: _quill2.default.sources.USER });
@@ -38701,14 +38344,7 @@ describe('Quill', function () {
     });
 
     it('(index:number, length:number, format:string, value:string)', function () {
-      var _overload7 = (0, _quill.overload)(0, 1, 'color', _quill2.default.sources.USER),
-          _overload8 = _slicedToArray(_overload7, 4);
-
-      const index = _overload8[0],
-            length = _overload8[1],
-            formats = _overload8[2],
-            source = _overload8[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(0, 1, 'color', _quill2.default.sources.USER);
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({ color: _quill2.default.sources.USER });
@@ -38716,14 +38352,7 @@ describe('Quill', function () {
     });
 
     it('(index:number, length:number, format:object)', function () {
-      var _overload9 = (0, _quill.overload)(0, 1, { bold: true }),
-          _overload10 = _slicedToArray(_overload9, 4);
-
-      const index = _overload10[0],
-            length = _overload10[1],
-            formats = _overload10[2],
-            source = _overload10[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(0, 1, { bold: true });
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({ bold: true });
@@ -38731,14 +38360,7 @@ describe('Quill', function () {
     });
 
     it('(index:number, length:number, format:object, source:string)', function () {
-      var _overload11 = (0, _quill.overload)(0, 1, { bold: true }, _quill2.default.sources.USER),
-          _overload12 = _slicedToArray(_overload11, 4);
-
-      const index = _overload12[0],
-            length = _overload12[1],
-            formats = _overload12[2],
-            source = _overload12[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(0, 1, { bold: true }, _quill2.default.sources.USER);
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({ bold: true });
@@ -38746,14 +38368,7 @@ describe('Quill', function () {
     });
 
     it('(index:number, length:number, source:string)', function () {
-      var _overload13 = (0, _quill.overload)(0, 1, _quill2.default.sources.USER),
-          _overload14 = _slicedToArray(_overload13, 4);
-
-      const index = _overload14[0],
-            length = _overload14[1],
-            formats = _overload14[2],
-            source = _overload14[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(0, 1, _quill2.default.sources.USER);
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({});
@@ -38761,14 +38376,7 @@ describe('Quill', function () {
     });
 
     it('(index:number, source:string)', function () {
-      var _overload15 = (0, _quill.overload)(0, _quill2.default.sources.USER),
-          _overload16 = _slicedToArray(_overload15, 4);
-
-      const index = _overload16[0],
-            length = _overload16[1],
-            formats = _overload16[2],
-            source = _overload16[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(0, _quill2.default.sources.USER);
       expect(index).toBe(0);
       expect(length).toBe(0);
       expect(formats).toEqual({});
@@ -38776,14 +38384,7 @@ describe('Quill', function () {
     });
 
     it('(range:range)', function () {
-      var _overload17 = (0, _quill.overload)(new _selection.Range(0, 1)),
-          _overload18 = _slicedToArray(_overload17, 4);
-
-      const index = _overload18[0],
-            length = _overload18[1],
-            formats = _overload18[2],
-            source = _overload18[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(new _selection.Range(0, 1));
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({});
@@ -38791,14 +38392,7 @@ describe('Quill', function () {
     });
 
     it('(range:range, format:string, value:boolean, source:string)', function () {
-      var _overload19 = (0, _quill.overload)(new _selection.Range(0, 1), 'bold', true, _quill2.default.sources.USER),
-          _overload20 = _slicedToArray(_overload19, 4);
-
-      const index = _overload20[0],
-            length = _overload20[1],
-            formats = _overload20[2],
-            source = _overload20[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(new _selection.Range(0, 1), 'bold', true, _quill2.default.sources.USER);
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({ bold: true });
@@ -38806,14 +38400,7 @@ describe('Quill', function () {
     });
 
     it('(range:range, format:string, value:string, source:string)', function () {
-      var _overload21 = (0, _quill.overload)(new _selection.Range(0, 1), 'color', _quill2.default.sources.API, _quill2.default.sources.USER),
-          _overload22 = _slicedToArray(_overload21, 4);
-
-      const index = _overload22[0],
-            length = _overload22[1],
-            formats = _overload22[2],
-            source = _overload22[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(new _selection.Range(0, 1), 'color', _quill2.default.sources.API, _quill2.default.sources.USER);
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({ color: _quill2.default.sources.API });
@@ -38821,14 +38408,7 @@ describe('Quill', function () {
     });
 
     it('(range:range, format:string, value:string)', function () {
-      var _overload23 = (0, _quill.overload)(new _selection.Range(0, 1), 'color', _quill2.default.sources.USER),
-          _overload24 = _slicedToArray(_overload23, 4);
-
-      const index = _overload24[0],
-            length = _overload24[1],
-            formats = _overload24[2],
-            source = _overload24[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(new _selection.Range(0, 1), 'color', _quill2.default.sources.USER);
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({ color: _quill2.default.sources.USER });
@@ -38836,16 +38416,9 @@ describe('Quill', function () {
     });
 
     it('(range:range, format:object)', function () {
-      var _overload25 = (0, _quill.overload)(new _selection.Range(0, 1), {
+      const [index, length, formats, source] = (0, _quill.overload)(new _selection.Range(0, 1), {
         bold: true
-      }),
-          _overload26 = _slicedToArray(_overload25, 4);
-
-      const index = _overload26[0],
-            length = _overload26[1],
-            formats = _overload26[2],
-            source = _overload26[3];
-
+      });
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({ bold: true });
@@ -38853,14 +38426,7 @@ describe('Quill', function () {
     });
 
     it('(range:range, format:object, source:string)', function () {
-      var _overload27 = (0, _quill.overload)(new _selection.Range(0, 1), { bold: true }, _quill2.default.sources.USER),
-          _overload28 = _slicedToArray(_overload27, 4);
-
-      const index = _overload28[0],
-            length = _overload28[1],
-            formats = _overload28[2],
-            source = _overload28[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(new _selection.Range(0, 1), { bold: true }, _quill2.default.sources.USER);
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({ bold: true });
@@ -38868,14 +38434,7 @@ describe('Quill', function () {
     });
 
     it('(range:range, source:string)', function () {
-      var _overload29 = (0, _quill.overload)(new _selection.Range(0, 1), _quill2.default.sources.USER),
-          _overload30 = _slicedToArray(_overload29, 4);
-
-      const index = _overload30[0],
-            length = _overload30[1],
-            formats = _overload30[2],
-            source = _overload30[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(new _selection.Range(0, 1), _quill2.default.sources.USER);
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({});
@@ -38883,14 +38442,7 @@ describe('Quill', function () {
     });
 
     it('(range:range)', function () {
-      var _overload31 = (0, _quill.overload)(new _selection.Range(0, 1)),
-          _overload32 = _slicedToArray(_overload31, 4);
-
-      const index = _overload32[0],
-            length = _overload32[1],
-            formats = _overload32[2],
-            source = _overload32[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(new _selection.Range(0, 1));
       expect(index).toBe(0);
       expect(length).toBe(1);
       expect(formats).toEqual({});
@@ -38898,14 +38450,7 @@ describe('Quill', function () {
     });
 
     it('(range:range, dummy:number)', function () {
-      var _overload33 = (0, _quill.overload)(new _selection.Range(10, 1), 0),
-          _overload34 = _slicedToArray(_overload33, 4);
-
-      const index = _overload34[0],
-            length = _overload34[1],
-            formats = _overload34[2],
-            source = _overload34[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(new _selection.Range(10, 1), 0);
       expect(index).toBe(10);
       expect(length).toBe(1);
       expect(formats).toEqual({});
@@ -38913,14 +38458,7 @@ describe('Quill', function () {
     });
 
     it('(range:range, dummy:number, format:string, value:boolean)', function () {
-      var _overload35 = (0, _quill.overload)(new _selection.Range(10, 1), 0, 'bold', true),
-          _overload36 = _slicedToArray(_overload35, 4);
-
-      const index = _overload36[0],
-            length = _overload36[1],
-            formats = _overload36[2],
-            source = _overload36[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(new _selection.Range(10, 1), 0, 'bold', true);
       expect(index).toBe(10);
       expect(length).toBe(1);
       expect(formats).toEqual({ bold: true });
@@ -38928,14 +38466,7 @@ describe('Quill', function () {
     });
 
     it('(range:range, dummy:number, format:object, source:string)', function () {
-      var _overload37 = (0, _quill.overload)(new _selection.Range(10, 1), 0, { bold: true }, _quill2.default.sources.USER),
-          _overload38 = _slicedToArray(_overload37, 4);
-
-      const index = _overload38[0],
-            length = _overload38[1],
-            formats = _overload38[2],
-            source = _overload38[3];
-
+      const [index, length, formats, source] = (0, _quill.overload)(new _selection.Range(10, 1), 0, { bold: true }, _quill2.default.sources.USER);
       expect(index).toBe(10);
       expect(length).toBe(1);
       expect(formats).toEqual({ bold: true });
@@ -38980,8 +38511,6 @@ describe('Quill', function () {
 
 "use strict";
 
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _selection = __webpack_require__(/*! ../../../core/selection */ "./core/selection.js");
 
@@ -39032,12 +38561,7 @@ describe('Selection', function () {
     it('empty document', function () {
       const selection = this.initialize(_selection2.default, '');
       selection.setNativeRange(this.container.querySelector('br'), 0);
-
-      var _selection$getRange = selection.getRange(),
-          _selection$getRange2 = _slicedToArray(_selection$getRange, 1);
-
-      const range = _selection$getRange2[0];
-
+      const [range] = selection.getRange();
       expect(range.index).toEqual(0);
       expect(range.length).toEqual(0);
     });
@@ -39045,12 +38569,7 @@ describe('Selection', function () {
     it('empty line', function () {
       const selection = this.initialize(_selection2.default, '<p>0</p><p><br></p><p>3</p>');
       selection.setNativeRange(this.container.querySelector('br'), 0);
-
-      var _selection$getRange3 = selection.getRange(),
-          _selection$getRange4 = _slicedToArray(_selection$getRange3, 1);
-
-      const range = _selection$getRange4[0];
-
+      const [range] = selection.getRange();
       expect(range.index).toEqual(2);
       expect(range.length).toEqual(0);
     });
@@ -39058,12 +38577,7 @@ describe('Selection', function () {
     it('end of line', function () {
       const selection = this.initialize(_selection2.default, '<p>0</p>');
       selection.setNativeRange(this.container.firstChild.firstChild, 1);
-
-      var _selection$getRange5 = selection.getRange(),
-          _selection$getRange6 = _slicedToArray(_selection$getRange5, 1);
-
-      const range = _selection$getRange6[0];
-
+      const [range] = selection.getRange();
       expect(range.index).toEqual(1);
       expect(range.length).toEqual(0);
     });
@@ -39071,12 +38585,7 @@ describe('Selection', function () {
     it('text node', function () {
       const selection = this.initialize(_selection2.default, '<p>0123</p>');
       selection.setNativeRange(this.container.firstChild.firstChild, 1);
-
-      var _selection$getRange7 = selection.getRange(),
-          _selection$getRange8 = _slicedToArray(_selection$getRange7, 1);
-
-      const range = _selection$getRange8[0];
-
+      const [range] = selection.getRange();
       expect(range.index).toEqual(1);
       expect(range.length).toEqual(0);
     });
@@ -39084,12 +38593,7 @@ describe('Selection', function () {
     it('line boundaries', function () {
       const selection = this.initialize(_selection2.default, '<p><br></p><p>12</p>');
       selection.setNativeRange(this.container.firstChild, 0, this.container.lastChild.lastChild, 2);
-
-      var _selection$getRange9 = selection.getRange(),
-          _selection$getRange10 = _slicedToArray(_selection$getRange9, 1);
-
-      const range = _selection$getRange10[0];
-
+      const [range] = selection.getRange();
       expect(range.index).toEqual(0);
       expect(range.length).toEqual(3);
     });
@@ -39101,12 +38605,7 @@ describe('Selection', function () {
           <li data-list="bullet"><em><u>34</u></em></li>
         </ol>`);
       selection.setNativeRange(this.container.querySelector('em').firstChild, 1, this.container.querySelector('u').firstChild, 1);
-
-      var _selection$getRange11 = selection.getRange(),
-          _selection$getRange12 = _slicedToArray(_selection$getRange11, 1);
-
-      const range = _selection$getRange12[0];
-
+      const [range] = selection.getRange();
       expect(range.index).toEqual(1);
       expect(range.length).toEqual(3);
     });
@@ -39124,12 +38623,7 @@ describe('Selection', function () {
           </li>
         </ol>`);
       selection.setNativeRange(this.container.firstChild, 1, this.container.lastChild.lastChild, 1);
-
-      var _selection$getRange13 = selection.getRange(),
-          _selection$getRange14 = _slicedToArray(_selection$getRange13, 1);
-
-      const range = _selection$getRange14[0];
-
+      const [range] = selection.getRange();
       expect(range.index).toEqual(1);
       expect(range.length).toEqual(3);
     });
@@ -39137,12 +38631,7 @@ describe('Selection', function () {
     it('between inlines', function () {
       const selection = this.initialize(_selection2.default, '<p><em>01</em><s>23</s><u>45</u></p>');
       selection.setNativeRange(this.container.firstChild, 1, this.container.firstChild, 2);
-
-      var _selection$getRange15 = selection.getRange(),
-          _selection$getRange16 = _slicedToArray(_selection$getRange15, 1);
-
-      const range = _selection$getRange16[0];
-
+      const [range] = selection.getRange();
       expect(range.index).toEqual(2);
       expect(range.length).toEqual(2);
     });
@@ -39156,12 +38645,7 @@ describe('Selection', function () {
           <li data-list="bullet">78</li>
         </ol>`);
       selection.setNativeRange(this.container, 1, this.container.lastChild, 1);
-
-      var _selection$getRange17 = selection.getRange(),
-          _selection$getRange18 = _slicedToArray(_selection$getRange17, 1);
-
-      const range = _selection$getRange18[0];
-
+      const [range] = selection.getRange();
       expect(range.index).toEqual(3);
       expect(range.length).toEqual(4);
     });
@@ -39172,12 +38656,7 @@ describe('Selection', function () {
         <div></div>`);
       const selection = this.initialize(_selection2.default, '<p>0123</p>', container.lastChild);
       container.firstChild.select();
-
-      var _selection$getRange19 = selection.getRange(),
-          _selection$getRange20 = _slicedToArray(_selection$getRange19, 1);
-
-      const range = _selection$getRange20[0];
-
+      const [range] = selection.getRange();
       expect(range).toEqual(null);
     });
   });
@@ -39187,12 +38666,7 @@ describe('Selection', function () {
       const selection = this.initialize(_selection2.default, '');
       const expected = new _selection.Range(0);
       selection.setRange(expected);
-
-      var _selection$getRange21 = selection.getRange(),
-          _selection$getRange22 = _slicedToArray(_selection$getRange21, 1);
-
-      const range = _selection$getRange22[0];
-
+      const [range] = selection.getRange();
       expect(range).toEqual(expected);
       expect(selection.hasFocus()).toBe(true);
     });
@@ -39205,12 +38679,7 @@ describe('Selection', function () {
         </ol>`);
       const expected = new _selection.Range(0, 1);
       selection.setRange(expected);
-
-      var _selection$getRange23 = selection.getRange(),
-          _selection$getRange24 = _slicedToArray(_selection$getRange23, 1);
-
-      const range = _selection$getRange24[0];
-
+      const [range] = selection.getRange();
       expect(range).toEqual(range);
       expect(selection.hasFocus()).toBe(true);
     });
@@ -39223,12 +38692,7 @@ describe('Selection', function () {
         </ol>`);
       const expected = new _selection.Range(1, 3);
       selection.setRange(expected);
-
-      var _selection$getRange25 = selection.getRange(),
-          _selection$getRange26 = _slicedToArray(_selection$getRange25, 1);
-
-      const range = _selection$getRange26[0];
-
+      const [range] = selection.getRange();
       expect(range).toEqual(expected);
       expect(selection.hasFocus()).toBe(true);
     });
@@ -39237,12 +38701,7 @@ describe('Selection', function () {
       const selection = this.initialize(_selection2.default, '<p><em>01</em><s>23</s><u>45</u></p>');
       const expected = new _selection.Range(2, 2);
       selection.setRange(expected);
-
-      var _selection$getRange27 = selection.getRange(),
-          _selection$getRange28 = _slicedToArray(_selection$getRange27, 1);
-
-      const range = _selection$getRange28[0];
-
+      const [range] = selection.getRange();
       expect(range).toEqual(expected);
       expect(selection.hasFocus()).toBe(true);
     });
@@ -39251,12 +38710,7 @@ describe('Selection', function () {
       const selection = this.initialize(_selection2.default, `<p><img src="/assets/favicon.png"></p>`);
       const expected = new _selection.Range(1, 0);
       selection.setRange(expected);
-
-      var _selection$getRange29 = selection.getRange(),
-          _selection$getRange30 = _slicedToArray(_selection$getRange29, 1);
-
-      const range = _selection$getRange30[0];
-
+      const [range] = selection.getRange();
       expect(range).toEqual(expected);
       expect(selection.hasFocus()).toBe(true);
     });
@@ -39275,12 +38729,7 @@ describe('Selection', function () {
         </ol>`);
       const expected = new _selection.Range(1, 3);
       selection.setRange(expected);
-
-      var _selection$getRange31 = selection.getRange(),
-          _selection$getRange32 = _slicedToArray(_selection$getRange31, 1);
-
-      const range = _selection$getRange32[0];
-
+      const [range] = selection.getRange();
       expect(range).toEqual(expected);
       expect(selection.hasFocus()).toBe(true);
     });
@@ -39288,21 +38737,10 @@ describe('Selection', function () {
     it('null', function () {
       const selection = this.initialize(_selection2.default, '<p>0123</p>');
       selection.setRange(new _selection.Range(1));
-
-      var _selection$getRange33 = selection.getRange(),
-          _selection$getRange34 = _slicedToArray(_selection$getRange33, 1);
-
-      let range = _selection$getRange34[0];
-
+      let [range] = selection.getRange();
       expect(range).not.toEqual(null);
       selection.setRange(null);
-
-      var _selection$getRange35 = selection.getRange();
-
-      var _selection$getRange36 = _slicedToArray(_selection$getRange35, 1);
-
-      range = _selection$getRange36[0];
-
+      [range] = selection.getRange();
       expect(range).toEqual(null);
       expect(selection.hasFocus()).toBe(false);
     });
@@ -42003,9 +41441,7 @@ describe('Picker', function () {
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.default = exports.BaseTooltip = undefined;
 
 var _extend = __webpack_require__(/*! extend */ "./node_modules/extend/index.js");
@@ -42201,20 +41637,17 @@ class BaseTooltip extends _tooltip2.default {
   }
 
   restoreFocus() {
-    const scrollTop = this.quill.scrollingContainer.scrollTop;
-
+    const { scrollTop } = this.quill.scrollingContainer;
     this.quill.focus();
     this.quill.scrollingContainer.scrollTop = scrollTop;
   }
 
   save() {
-    let value = this.textbox.value;
-
+    let { value } = this.textbox;
     switch (this.root.getAttribute('data-mode')) {
       case 'link':
         {
-          const scrollTop = this.quill.root.scrollTop;
-
+          const { scrollTop } = this.quill.root;
           if (this.linkRange) {
             this.quill.formatText(this.linkRange, 'link', value, _emitter2.default.sources.USER);
             delete this.linkRange;
@@ -42289,9 +41722,7 @@ exports.default = BaseTheme;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.default = exports.BubbleTooltip = undefined;
 
 var _extend = __webpack_require__(/*! extend */ "./node_modules/extend/index.js");
@@ -42423,11 +41854,7 @@ exports.default = BubbleTheme;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+exports.__esModule = true;
 
 var _extend = __webpack_require__(/*! extend */ "./node_modules/extend/index.js");
 
@@ -42484,12 +41911,7 @@ class SnowTooltip extends _base.BaseTooltip {
     this.quill.on(_emitter2.default.events.SELECTION_CHANGE, (range, oldRange, source) => {
       if (range == null) return;
       if (range.length === 0 && source === _emitter2.default.sources.USER) {
-        var _quill$scroll$descend = this.quill.scroll.descendant(_link2.default, range.index),
-            _quill$scroll$descend2 = _slicedToArray(_quill$scroll$descend, 2);
-
-        const link = _quill$scroll$descend2[0],
-              offset = _quill$scroll$descend2[1];
-
+        const [link, offset] = this.quill.scroll.descendant(_link2.default, range.index);
         if (link != null) {
           this.linkRange = new _selection.Range(range.index - offset, link.length());
           const preview = _link2.default.formats(link.domNode);
@@ -42546,8 +41968,7 @@ SnowTheme.DEFAULTS = (0, _extend2.default)(true, {}, _base2.default.DEFAULTS, {
             if (/^\S+@\S+\.\S+$/.test(preview) && preview.indexOf('mailto:') !== 0) {
               preview = `mailto:${preview}`;
             }
-            const tooltip = this.quill.theme.tooltip;
-
+            const { tooltip } = this.quill.theme;
             tooltip.edit('link', preview);
           } else {
             this.quill.format('link', false);
@@ -42572,9 +41993,7 @@ exports.default = SnowTheme;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _picker = __webpack_require__(/*! ./picker */ "./ui/picker.js");
 
@@ -42626,9 +42045,7 @@ exports.default = ColorPicker;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _picker = __webpack_require__(/*! ./picker */ "./ui/picker.js");
 
@@ -42843,9 +42260,7 @@ module.exports = {
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _dropdown = __webpack_require__(/*! ../assets/icons/dropdown.svg */ "./assets/icons/dropdown.svg");
 
@@ -43035,9 +42450,7 @@ exports.default = Picker;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 class Tooltip {
   constructor(quill, boundsContainer) {
     this.quill = quill;
