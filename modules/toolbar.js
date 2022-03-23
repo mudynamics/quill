@@ -59,7 +59,7 @@ class Toolbar extends Module {
 
     const formats = this.quill.getFormat(range.index);
 
-    return formats.table && !range.length;
+    return formats.table;
   }
 
   attach(input) {
@@ -127,12 +127,6 @@ class Toolbar extends Module {
     const formats = range == null ? {} : this.quill.getFormat(range);
     this.controls.forEach(pair => {
       const [format, input] = pair;
-      const selection = this.quill.getSelection();
-      const html = range !== null ? this.quill.getSemanticHTML(range) : null;
-      const contents = range !== null ? this.quill.getContents(range) : null;
-
-      console.log({ range, formats, format, input, selection, html, contents });
-
       if (format === 'list') {
         if (this.isTable(range)) {
           input.setAttribute('disabled', true);
