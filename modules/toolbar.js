@@ -131,7 +131,7 @@ class Toolbar extends Module {
       const html = range !== null ? this.quill.getSemanticHTML(range) : null;
       const contents = range !== null ? this.quill.getContents(range) : null;
 
-      console.log({ range, format, input, selection, html, contents });
+      console.log({ range, formats, format, input, selection, html, contents });
 
       if (format === 'list') {
         if (this.isTable(range)) {
