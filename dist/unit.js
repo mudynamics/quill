@@ -5941,6 +5941,7 @@ class Toolbar extends _core_module__WEBPACK_IMPORTED_MODULE_4__["default"] {
       const contents = range !== null ? this.quill.getContents(range) : null;
       console.log({
         range,
+        formats,
         format,
         input,
         selection,
