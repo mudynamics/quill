@@ -59,7 +59,7 @@ class Toolbar extends Module {
 
     const formats = this.quill.getFormat(range.index);
 
-    return formats.table && !range.length;
+    return formats.table;
   }
 
   attach(input) {

@@ -5869,7 +5869,7 @@ class Toolbar extends _core_module__WEBPACK_IMPORTED_MODULE_4__["default"] {
     }
 
     const formats = this.quill.getFormat(range.index);
-    return formats.table && !range.length;
+    return formats.table;
   }
 
   attach(input) {
