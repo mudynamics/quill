@@ -127,6 +127,12 @@ class Toolbar extends Module {
     const formats = range == null ? {} : this.quill.getFormat(range);
     this.controls.forEach(pair => {
       const [format, input] = pair;
+      const selection = this.quill.getSelection();
+      const html = this.quill.getSemanticHTML(range);
+      const contents = this.quill.getContents(range);
+
+      console.log({ range, format, input, selection, html, contents });
+
       if (format === 'list') {
         if (this.isTable(range)) {
           input.setAttribute('disabled', true);
