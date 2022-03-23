@@ -128,8 +128,8 @@ class Toolbar extends Module {
     this.controls.forEach(pair => {
       const [format, input] = pair;
       const selection = this.quill.getSelection();
-      const html = this.quill.getSemanticHTML(range);
-      const contents = this.quill.getContents(range);
+      const html = range !== null ? this.quill.getSemanticHTML(range) : null;
+      const contents = range !== null ? this.quill.getContents(range) : null;
 
       console.log({ range, format, input, selection, html, contents });
 
