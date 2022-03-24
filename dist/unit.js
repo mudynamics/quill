@@ -5815,6 +5815,19 @@ __webpack_require__.r(__webpack_exports__);
 
 const debug = Object(_core_logger__WEBPACK_IMPORTED_MODULE_3__["default"])('quill:toolbar');
 
+const isTable = range => {
+  if (!range) {
+    range = undefined.quill.getSelection();
+  }
+
+  if (!range) {
+    return false;
+  }
+
+  const formats = undefined.quill.getFormat(range.index);
+  return formats.table;
+};
+
 class Toolbar extends _core_module__WEBPACK_IMPORTED_MODULE_4__["default"] {
   constructor(quill, options) {
     super(quill, options);
@@ -5857,19 +5870,6 @@ class Toolbar extends _core_module__WEBPACK_IMPORTED_MODULE_4__["default"] {
 
   addHandler(format, handler) {
     this.handlers[format] = handler;
-  }
-
-  isTable(range) {
-    if (!range) {
-      range = this.quill.getSelection();
-    }
-
-    if (!range) {
-      return false;
-    }
-
-    const formats = this.quill.getFormat(range.index);
-    return formats.table;
   }
 
   attach(input) {
@@ -5937,8 +5937,8 @@ class Toolbar extends _core_module__WEBPACK_IMPORTED_MODULE_4__["default"] {
     this.controls.forEach(pair => {
       const [format, input] = pair;
 
-      if (format === 'list') {
-        if (this.isTable(range)) {
+      if (['list', 'blockquote'].includes(format)) {
+        if (isTable(range)) {
           input.setAttribute('disabled', true);
           input.classList.add('button-disabled');
         } else {
@@ -6058,6 +6058,9 @@ Toolbar.DEFAULTS = {
             this.quill.format(name, false, _core_quill__WEBPACK_IMPORTED_MODULE_2__["default"].sources.USER);
           }
         });
+      } else if (isTable(range)) {
+        this.quill.removeFormat(range, _core_quill__WEBPACK_IMPORTED_MODULE_2__["default"].sources.USER);
+        this.quill.format('table', true, _core_quill__WEBPACK_IMPORTED_MODULE_2__["default"].sources.USER);
       } else {
         this.quill.removeFormat(range, _core_quill__WEBPACK_IMPORTED_MODULE_2__["default"].sources.USER);
       }
