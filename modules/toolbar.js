@@ -6,6 +6,17 @@ import Module from '../core/module';
 
 const debug = logger('quill:toolbar');
 
+const removableStyles = [
+  'bold',
+  'italic',
+  'underline',
+  'strike',
+  'align',
+  'color',
+  'background',
+  'indent',
+];
+
 const isTable = range => {
   if (!range) {
     range = this.quill.getSelection();
@@ -127,7 +138,8 @@ class Toolbar extends Module {
     const formats = range == null ? {} : this.quill.getFormat(range);
     this.controls.forEach(pair => {
       const [format, input] = pair;
-      if (['list', 'blockquote'].includes(format)) {
+      console.log({ formats, format });
+      if (format === 'list' || format === 'blockquote') {
         if (isTable(range)) {
           input.setAttribute('disabled', true);
           input.classList.add('button-disabled');
@@ -236,13 +248,13 @@ Toolbar.DEFAULTS = {
         const formats = this.quill.getFormat();
         Object.keys(formats).forEach(name => {
           // Clean functionality in existing apps only clean inline formats
+          if (name === 'table') return;
           if (this.quill.scroll.query(name, Scope.INLINE) != null) {
             this.quill.format(name, false, Quill.sources.USER);
           }
         });
       } else if (isTable(range)) {
-        this.quill.removeFormat(range, Quill.sources.USER);
-        this.quill.format('table', true, Quill.sources.USER);
+        removableStyles.forEach(style => this.quill.format(style, false));
       } else {
         this.quill.removeFormat(range, Quill.sources.USER);
       }
