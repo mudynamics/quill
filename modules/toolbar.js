@@ -6,6 +6,31 @@ import Module from '../core/module';
 
 const debug = logger('quill:toolbar');
 
+const removableStyles = [
+  'bold',
+  'italic',
+  'underline',
+  'strike',
+  'align',
+  'color',
+  'background',
+  'indent',
+];
+
+function isTable(range, editor) {
+  if (!range) {
+    range = editor.getSelection();
+  }
+
+  if (!range) {
+    return false;
+  }
+
+  const formats = editor.getFormat(range.index);
+
+  return formats.table;
+}
+
 class Toolbar extends Module {
   constructor(quill, options) {
     super(quill, options);
@@ -46,20 +71,6 @@ class Toolbar extends Module {
 
   addHandler(format, handler) {
     this.handlers[format] = handler;
-  }
-
-  isTable(range) {
-    if (!range) {
-      range = this.quill.getSelection();
-    }
-
-    if (!range) {
-      return false;
-    }
-
-    const formats = this.quill.getFormat(range.index);
-
-    return formats.table;
   }
 
   attach(input) {
@@ -127,8 +138,8 @@ class Toolbar extends Module {
     const formats = range == null ? {} : this.quill.getFormat(range);
     this.controls.forEach(pair => {
       const [format, input] = pair;
-      if (format === 'list') {
-        if (this.isTable(range)) {
+      if (format === 'list' || format === 'blockquote') {
+        if (isTable(range, this.quill)) {
           input.setAttribute('disabled', true);
           input.classList.add('button-disabled');
         } else {
@@ -236,10 +247,13 @@ Toolbar.DEFAULTS = {
         const formats = this.quill.getFormat();
         Object.keys(formats).forEach(name => {
           // Clean functionality in existing apps only clean inline formats
+          if (name === 'table') return;
           if (this.quill.scroll.query(name, Scope.INLINE) != null) {
             this.quill.format(name, false, Quill.sources.USER);
           }
         });
+      } else if (isTable(range, this.quill)) {
+        removableStyles.forEach(style => this.quill.format(style, false));
       } else {
         this.quill.removeFormat(range, Quill.sources.USER);
       }
