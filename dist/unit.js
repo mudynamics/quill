@@ -5816,18 +5816,18 @@ __webpack_require__.r(__webpack_exports__);
 const debug = Object(_core_logger__WEBPACK_IMPORTED_MODULE_3__["default"])('quill:toolbar');
 const removableStyles = ['bold', 'italic', 'underline', 'strike', 'align', 'color', 'background', 'indent'];
 
-const isTable = range => {
+function isTable(range, editor) {
   if (!range) {
-    range = undefined.quill.getSelection();
+    range = editor.getSelection();
   }
 
   if (!range) {
     return false;
   }
 
-  const formats = undefined.quill.getFormat(range.index);
+  const formats = this.quill.getFormat(range.index);
   return formats.table;
-};
+}
 
 class Toolbar extends _core_module__WEBPACK_IMPORTED_MODULE_4__["default"] {
   constructor(quill, options) {
@@ -5943,7 +5943,7 @@ class Toolbar extends _core_module__WEBPACK_IMPORTED_MODULE_4__["default"] {
       });
 
       if (format === 'list' || format === 'blockquote') {
-        if (isTable(range)) {
+        if (isTable(range, this.quill)) {
           input.setAttribute('disabled', true);
           input.classList.add('button-disabled');
         } else {
@@ -6065,7 +6065,7 @@ Toolbar.DEFAULTS = {
             this.quill.format(name, false, _core_quill__WEBPACK_IMPORTED_MODULE_2__["default"].sources.USER);
           }
         });
-      } else if (isTable(range)) {
+      } else if (isTable(range, this.quill)) {
         removableStyles.forEach(style => this.quill.format(style, false));
       } else {
         this.quill.removeFormat(range, _core_quill__WEBPACK_IMPORTED_MODULE_2__["default"].sources.USER);

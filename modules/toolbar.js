@@ -17,9 +17,9 @@ const removableStyles = [
   'indent',
 ];
 
-const isTable = range => {
+function isTable(range, editor) {
   if (!range) {
-    range = this.quill.getSelection();
+    range = editor.getSelection();
   }
 
   if (!range) {
@@ -29,7 +29,7 @@ const isTable = range => {
   const formats = this.quill.getFormat(range.index);
 
   return formats.table;
-};
+}
 
 class Toolbar extends Module {
   constructor(quill, options) {
@@ -140,7 +140,7 @@ class Toolbar extends Module {
       const [format, input] = pair;
       console.log({ formats, format });
       if (format === 'list' || format === 'blockquote') {
-        if (isTable(range)) {
+        if (isTable(range, this.quill)) {
           input.setAttribute('disabled', true);
           input.classList.add('button-disabled');
         } else {
@@ -253,7 +253,7 @@ Toolbar.DEFAULTS = {
             this.quill.format(name, false, Quill.sources.USER);
           }
         });
-      } else if (isTable(range)) {
+      } else if (isTable(range, this.quill)) {
         removableStyles.forEach(style => this.quill.format(style, false));
       } else {
         this.quill.removeFormat(range, Quill.sources.USER);
