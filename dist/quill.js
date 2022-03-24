@@ -5825,7 +5825,7 @@ function isTable(range, editor) {
     return false;
   }
 
-  const formats = this.quill.getFormat(range.index);
+  const formats = editor.getFormat(range.index);
   return formats.table;
 }
 
